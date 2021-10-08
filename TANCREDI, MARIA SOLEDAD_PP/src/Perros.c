@@ -88,6 +88,7 @@ void cargarPerrosHarcode(Perro* arrayPerros, int* id)
 int eliminarPerro(Perro* unidadPerro)
 {
 	int retorno=-1;
+
 	if(unidadPerro!=NULL)
 	{
 		unidadPerro->isEmpty=0;
@@ -95,3 +96,51 @@ int eliminarPerro(Perro* unidadPerro)
 	}
 	return retorno;
 }
+
+int findEmpty(Perro* arrayPerrito, int tam)
+{
+	int indice;
+
+	if(arrayPerrito != NULL)
+	{
+		for(int i = 0; i < tam; i++)
+		{
+			if(arrayPerrito[i].isEmpty == 0)
+			{
+				indice = i;
+			}
+		}
+	}
+	return indice;
+}
+
+int altaPerrito(Perro* arrayPerrito, int tam)
+{
+	int retorno = -1;
+	int indice;
+	Perro bufferPerrito;
+
+	if(arrayPerrito != NULL)
+	{
+		indice = findEmpty(arrayPerrito, tam);
+
+		if(utn_nombreOapellido(bufferPerrito.nombre, "Ingrese el nombre del perro: ", "Error. Reingrese el nombre."
+				, TAM,1 ) == 0 && utn_nombreOapellido(bufferPerrito.raza, "Ingrese la raza: ", "Error. Reingrese la raza.", TAM, 1) == 0
+				&& utn_getNumber(&bufferPerrito.edad, "Ingrese la edad: ", "Error. Reingrese la edad.", 1,50, 1) == 0)
+		{
+			strcpy(arrayPerrito[indice].nombre, bufferPerrito.nombre);
+			strcpy(arrayPerrito[indice].raza, bufferPerrito.raza);
+			arrayPerrito[indice].edad = bufferPerrito.edad;
+			arrayPerrito[indice].isEmpty = 1;
+			retorno = 0;
+		}
+		else
+		{
+			printf("No se han podido cargar correctamente los datos. Vuelva a intentarlo.");
+		}
+	}
+
+	return retorno;
+}
+
+

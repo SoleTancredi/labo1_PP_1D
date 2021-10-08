@@ -16,7 +16,7 @@
 #include "BibliotecaUtn2021.h"
 #include "Perros.h"
 #include "EstadiaDiaria.h"
-#define CANT_P 3
+#define CANT_P 5
 #define CANT_E 30
 
 
@@ -40,6 +40,8 @@ int main(void) {
 
    }
 
+   mostrarListaPerros(arrayPerros, CANT_P);
+   altaPerrito(arrayPerros, CANT_P);
    mostrarListaPerros(arrayPerros, CANT_P);
 
 	return EXIT_SUCCESS;

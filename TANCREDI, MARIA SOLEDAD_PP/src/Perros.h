@@ -21,7 +21,10 @@ struct
 
 void inicializarPerro(Perro* array, int tam);
 int mostrarUnidadPerro(Perro unPerro);
-void mostrarListaPerros(Perro* arrayPerros, int tam); // PORQUE LLEVA PUNTERO, TIPO PERRO EN ESTE CASO?
+void mostrarListaPerros(Perro* arrayPerros, int tam);
 void cargarPerrosHarcode(Perro* arrayPerros, int* id);
 int eliminarPerro(Perro* unidadPerro);
+int findEmpty(Perro* arrayPerrito, int tam);
+int altaPerrito(Perro* arrayPerrito, int tam);
+
 #endif /* PERROS_H_ */

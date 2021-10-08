@@ -22,5 +22,7 @@ struct
 
 }typedef EstadiaDiaria;
 
+int menu();
+
 
 #endif /* ESTADIADIARIA_H_ */
