@@ -10,6 +10,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdio_ext.h>
+#include "BibliotecaUtn2021.h"
+
 
 int main(void) {
 	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
