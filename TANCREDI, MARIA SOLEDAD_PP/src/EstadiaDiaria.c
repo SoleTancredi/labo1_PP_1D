@@ -10,3 +10,5 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdio_ext.h>
+#include "BibliotecaUtn2021.h"
+#include "EstadiaDiaria.h"

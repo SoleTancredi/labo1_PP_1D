@@ -14,9 +14,24 @@
 #include <ctype.h>
 #include <stdio_ext.h>
 #include "BibliotecaUtn2021.h"
+#include "Perros.h"
+#include "EstadiaDiaria.h"
+#define CANT_P 12
+#define CANT_E 30
 
 
 int main(void) {
-	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
+
+   Perro arrayPerros[CANT_P];
+   EstadiaDiaria arrayEstadia[CANT_E];
+   int idPerro = 20;
+   int idEstadia = 100000;
+
+
+
+
+
+
+
 	return EXIT_SUCCESS;
 }
