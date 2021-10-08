@@ -20,6 +20,7 @@ struct
 }typedef Perro;
 
 void inicializarPerro(Perro* array, int tam);
+void mostrarUnidadPerro(Perro unPerro);
 
 
 #endif /* PERROS_H_ */

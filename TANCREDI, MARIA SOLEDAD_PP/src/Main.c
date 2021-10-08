@@ -23,9 +23,14 @@
 int main(void) {
 
    Perro arrayPerros[CANT_P];
-   EstadiaDiaria arrayEstadia[CANT_E];
-   int idPerro = 20;
-   int idEstadia = 100000;
+  // EstadiaDiaria arrayEstadia[CANT_E];
+  // int idPerro = 20;
+  // int idEstadia = 100000;
+
+   //inicializarPerro(arrayPerros[0], CANT_P);
+
+   mostrarUnidadPerro(arrayPerros[0]);
+
 
 
 

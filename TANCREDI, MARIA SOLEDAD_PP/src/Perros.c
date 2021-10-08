@@ -31,3 +31,15 @@ void inicializarPerro(Perro* array, int tam)
 		}
 	}
 }
+
+void mostrarUnidadPerro(Perro unPerro)
+{
+	if(unPerro.isEmpty == 1)
+	{
+		printf("**Datos del Perro**");
+		printf("\nID: ", unPerro.id);
+		printf("\nNOMBRE: ", unPerro.nombre);
+		printf("\nRAZA: ", unPerro.raza);
+		printf("\nEDAD: ", unPerro.edad);
+	}
+}
