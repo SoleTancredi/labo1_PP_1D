@@ -16,27 +16,31 @@
 #include "BibliotecaUtn2021.h"
 #include "Perros.h"
 #include "EstadiaDiaria.h"
-#define CANT_P 12
+#define CANT_P 3
 #define CANT_E 30
 
 
 int main(void) {
 
    Perro arrayPerros[CANT_P];
+   int id =7000;
   // EstadiaDiaria arrayEstadia[CANT_E];
-  // int idPerro = 20;
+  // int idPerro = 7000;
   // int idEstadia = 100000;
 
-   //inicializarPerro(arrayPerros[0], CANT_P);
+  // inicializarPerro(arrayPerros, CANT_P);
+   cargarPerrosHarcode(arrayPerros, &id);
+   mostrarListaPerros(arrayPerros, CANT_P);
 
-   mostrarUnidadPerro(arrayPerros[0]);
+   if(eliminarPerro(arrayPerros+2)==0)
+   {
 
+	   printf("\n %s", arrayPerros[2].nombre );
+	   puts("\n ELIMINADOO POR PULGOSO");
 
+   }
 
-
-
-
-
+   mostrarListaPerros(arrayPerros, CANT_P);
 
 	return EXIT_SUCCESS;
 }
