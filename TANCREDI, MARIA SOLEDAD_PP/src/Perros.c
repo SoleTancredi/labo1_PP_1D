@@ -153,10 +153,106 @@ int addPerrito(Perro* pUnidadPerrito, int len, int* id, char* name, char* race, 
 		(*pUnidadPerrito).isEmpty = 1;
 		(*pUnidadPerrito).id = *id++;
 		retorno = 0;
+	}
+
+	return retorno;
+}
 
 
+int menuModificar(Perro* arrayPerritos, int len)
+{
+	int option;
+	int id;
+	int indice;
+
+	printf("\n***** MODIFICAR DATOS *****");
+
+		if( utn_getNumber(&id, "\nIngrese el ID del perro que desea modificar: ","\nError. Reingrese el ID."
+				, 7000, 10000, 1) == 0)
+		{
+			findById(arrayPerritos, len, id, &indice);
+			printf("El perrito que se desea modificar es el: %d",indice);
+
+			if(utn_getNumber(&option, "\nIngrese la opcion del dato que desea modificar: "
+					"\n1.Nombre: "
+					"\n2.Raza: "
+					"\n3.Edad: ",
+					"\nError. Reingrese la opcion. "
+					, 1, 3, 1) == 0)
+			{
+				printf("\nUsted ha ingresado la opcion nº %d", option);
+			}
+		}
+		return option;
+}
+
+int findById(Perro* arrayPerritos, int tam, int id, int* indice)
+{
+	int retorno = -1;
+
+	if(arrayPerritos != NULL && indice != NULL)
+	{
+		for(int i = 0; i < tam; i++)
+		{
+			if(arrayPerritos[i].id == id)
+			{
+				*indice = i;
+				retorno = 0;
+			}
+		}
 	}
 
 	return retorno;
 
 }
+
+int modificarPerrito(Perro* arrayPerritos, int len)
+{
+	int retorno = -1;
+	int option;
+	Perro bufferPerrito;
+
+	if(arrayPerritos != NULL)
+	{
+		option = menuModificar(arrayPerritos, len);
+
+		switch(option)
+		{
+			case 1:
+				if(utn_nombreOapellido(bufferPerrito.nombre,"I\nngrese el nombre: "
+						, "\nError. Reingrese el nombre.", TAM, 1) == 0)
+				{
+					printf("\nEl nuevo nombre es: %s", bufferPerrito.nombre);
+					strcpy((*arrayPerritos).nombre,bufferPerrito.nombre);
+				}
+				else
+				{
+					printf("\nNo se ha podido realizar la modificacion de manera correcta");
+				}
+				break;
+			case 2:
+				if(utn_nombreOapellido(bufferPerrito.raza, "\nIngrese la raza: "
+						, "\nError. Reingrese la raza", TAM, 1) == 0)
+				{
+					printf("\nLa nueva raza es: %s", bufferPerrito.raza);
+					strcpy((*arrayPerritos).raza, bufferPerrito.raza);
+				}
+				break;
+			case 3:
+				if(utn_getNumber(&bufferPerrito.edad, "\nIngrese la edad: "
+						, "\nError. Reingrese la edad.", 1, 50, 1) == 0)
+				{
+					printf("\nLa nueva edad es: %d", bufferPerrito.edad);
+					(*arrayPerritos).edad = bufferPerrito.edad;
+				}
+				break;
+         retorno = 0;
+		}
+	}
+
+
+
+	return retorno;
+}
+
+

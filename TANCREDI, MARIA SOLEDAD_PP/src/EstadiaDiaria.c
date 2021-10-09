@@ -15,39 +15,25 @@
 
 int menu()
 {
-	int opcion;
+	int option;
 
 	printf("***** ESTADIAS DIARIAS *****");
 
-	if(utn_getNumber(&opcion, "Ingrese la opcion que desee realizar: ", "Error. Reingrese la opcion. "
+	if(utn_getNumber(&option, "Ingrese la opcion que desee realizar: "
+			"\n1.Reservar estadia: "
+			"\n2.Modificar estadia: "
+			"\n3.Cancelar estadia: "
+			"\n4.Listar estadias: "
+			"\n5.Listar perros: "
+			"\n6.Promedio de edad de los perros: "
+			, "Error. Reingrese la opcion. "
 			, 1, 6, 1) == 0)
 	{
-		switch(opcion)
-		{
-			case 1:
-				//reservar estadia
-				break;
-			case 2:
-				//modificar estadia
-				break;
-			case 3:
-				//cancelarestadia
-				break;
-			case 4:
-				//listar estadia
-				break;
-			case 5:
-				//listar perros
-				break;
-			case 6:
-				//promedio de edad de lo perros
-				break;
+		printf("Usted ha ingresado la opcion nº %d", option);
 
-		}
 	}
 
-
-return opcion;
+return option;
 
 
 }

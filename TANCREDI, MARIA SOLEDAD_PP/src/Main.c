@@ -42,6 +42,8 @@ int main(void) {
    mostrarListaPerros(arrayPerros, CANT_P);
    altaPerrito(arrayPerros, CANT_P, &idPerro);
    mostrarListaPerros(arrayPerros, CANT_P);
+   modificarPerrito(arrayPerros, CANT_P);
+   mostrarListaPerros(arrayPerros, CANT_P);
 
 	return EXIT_SUCCESS;
 }
