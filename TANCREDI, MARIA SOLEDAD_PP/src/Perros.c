@@ -81,6 +81,7 @@ void cargarPerrosHarcode(Perro* arrayPerros, int* id)
 		for(int i = 0; i < 3; i++)
 		{
 			arrayPerros[i] = bufferPerrito[i];
+			(*id)++;
 		}
 }
 
@@ -114,7 +115,7 @@ int findEmpty(Perro* arrayPerrito, int tam)
 	return indice;
 }
 
-int altaPerrito(Perro* arrayPerrito, int tam)
+int altaPerrito(Perro* arrayPerrito, int tam, int* id)
 {
 	int retorno = -1;
 	int indice;
@@ -128,11 +129,7 @@ int altaPerrito(Perro* arrayPerrito, int tam)
 				, TAM,1 ) == 0 && utn_nombreOapellido(bufferPerrito.raza, "Ingrese la raza: ", "Error. Reingrese la raza.", TAM, 1) == 0
 				&& utn_getNumber(&bufferPerrito.edad, "Ingrese la edad: ", "Error. Reingrese la edad.", 1,50, 1) == 0)
 		{
-			strcpy(arrayPerrito[indice].nombre, bufferPerrito.nombre);
-			strcpy(arrayPerrito[indice].raza, bufferPerrito.raza);
-			arrayPerrito[indice].edad = bufferPerrito.edad;
-			arrayPerrito[indice].isEmpty = 1;
-			retorno = 0;
+			addPerrito(&arrayPerrito[indice], tam, id, bufferPerrito.nombre, bufferPerrito.raza, bufferPerrito.edad);
 		}
 		else
 		{
@@ -143,4 +140,23 @@ int altaPerrito(Perro* arrayPerrito, int tam)
 	return retorno;
 }
 
+int addPerrito(Perro* pUnidadPerrito, int len, int* id, char* name, char* race, int age)
+{
+	int retorno = -1;
 
+	if(pUnidadPerrito != NULL && id != NULL && name != NULL && race != NULL)
+	{
+
+		strcpy((*pUnidadPerrito).nombre, name);
+		strcpy((*pUnidadPerrito).raza, race);
+		(*pUnidadPerrito).edad = age;
+		(*pUnidadPerrito).isEmpty = 1;
+		(*pUnidadPerrito).id = *id++;
+		retorno = 0;
+
+
+	}
+
+	return retorno;
+
+}

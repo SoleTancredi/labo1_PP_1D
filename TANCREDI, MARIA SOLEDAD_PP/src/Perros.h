@@ -25,6 +25,7 @@ void mostrarListaPerros(Perro* arrayPerros, int tam);
 void cargarPerrosHarcode(Perro* arrayPerros, int* id);
 int eliminarPerro(Perro* unidadPerro);
 int findEmpty(Perro* arrayPerrito, int tam);
-int altaPerrito(Perro* arrayPerrito, int tam);
+int altaPerrito(Perro* arrayPerrito, int tam, int* id);
+int addPerrito(Perro* pUnidadPerrito, int len, int* id, char* name, char* race, int age);
 
 #endif /* PERROS_H_ */
