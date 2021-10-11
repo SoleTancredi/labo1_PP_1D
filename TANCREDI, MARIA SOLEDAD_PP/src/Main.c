@@ -16,7 +16,7 @@
 #include "BibliotecaUtn2021.h"
 #include "Perros.h"
 #include "EstadiaDiaria.h"
-#define CANT_P 5
+#define CANT_P 10
 #define CANT_E 30
 
 
@@ -24,26 +24,75 @@ int main(void) {
 
    Perro arrayPerros[CANT_P];
    int idPerro = 7000;
+   int opcion;
+   int flagCarga = 0;
 
-  // EstadiaDiaria arrayEstadia[CANT_E];
-
-  // int idEstadia = 100000;
 
    inicializarPerro(arrayPerros, CANT_P);
-   cargarPerrosHarcode(arrayPerros, &idPerro);
-   mostrarListaPerros(arrayPerros, CANT_P);
 
-   if(eliminarPerro(arrayPerros+2)==0)
+
+   do
    {
-	   printf("\n %s", arrayPerros[2].nombre );
-	   puts("\n ELIMINADOO POR PULGOSO");
-   }
+	   opcion = menuPerrito();
 
-   mostrarListaPerros(arrayPerros, CANT_P);
-   altaPerrito(arrayPerros, CANT_P, &idPerro);
-   mostrarListaPerros(arrayPerros, CANT_P);
-   modificarPerrito(arrayPerros, CANT_P);
-   mostrarListaPerros(arrayPerros, CANT_P);
+	     switch(opcion)
+	     {
+	  		case 1:
+	  			cargarPerrosHarcode(arrayPerros, &idPerro);
+	  			if(altaPerrito(arrayPerros, CANT_P, &idPerro) == 0)
+	  			{
+	  				flagCarga = 1;
+	  				printf("\n// El nuevo perrito se ha dado de alta correctamente. //");
+	  			}
+	  			else
+	  			{
+	  				printf("\nNo se han podido cargar correctamente los datos. Vuelva a intentarlo.");
+	  			}
+	  		   break;
+	  		case 2:
+	  			if(flagCarga == 1 && darDeBajaPerrito(arrayPerros, CANT_P) == 0)
+	  			{
+	  				printf("\nEl perrito se ha eliminado de la lista.");
+
+	  			}
+	  			else
+	  			{
+	  				printf("\nNo hay elementos cargados. ");
+	  			}
+	  		   break;
+	  		case 3:
+	  			if(flagCarga == 1 && modificarPerrito(arrayPerros, CANT_P) == 0)
+	  			{
+
+	  			}
+	  			else
+				{
+	  				printf("\nNo hay elementos cargados. ");
+				}
+
+	  		   break;
+	  		case 4:
+	  			if(flagCarga == 1 )
+	  			{
+	  				 mostrarListaPerros(arrayPerros, CANT_P);
+	  			}
+	  			else
+	  			{
+	  				printf("\nNo hay elementos cargados. ");
+	  			}
+	  		   break;
+	  		case 5:
+	  			printf("FIN DEL PROGRAMA.");
+	  		   break;
+	     }
+
+
+   }while(opcion != 5);
+
+
+
+
+
 
 	return EXIT_SUCCESS;
 }

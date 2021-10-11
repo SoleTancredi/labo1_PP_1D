@@ -27,9 +27,11 @@ int eliminarPerro(Perro* unidadPerro);
 int findEmpty(Perro* arrayPerrito, int tam);
 int altaPerrito(Perro* arrayPerrito, int tam, int* id);
 int addPerrito(Perro* pUnidadPerrito, int len, int* id, char* name, char* race, int age);
-int menuModificar(Perro* arrayPerritos, int len);
+int menuModificar(Perro* arrayPerritos, int len, int* indice, int* option);
 int modificarPerrito(Perro* arrayPerritos, int len);
 int findById(Perro* arrayPerritos, int tam, int id, int* indice);
+int menuPerrito();
+int darDeBajaPerrito(Perro* arrayPerritos, int len);
 
 
 #endif /* PERROS_H_ */

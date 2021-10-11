@@ -33,10 +33,11 @@ void inicializarPerro(Perro* array, int tam)
 }
 
 /**
- * @fn void mostrarUnidadPerro(Perro)
- * @brief muestra el contenido de la variable de tipo perro
+ * @fn int mostrarUnidadPerro(Perro)
+ * @brief muestra los campos de un solo elemento del array
  *
  * @param unPerro
+ * @return ok 0 si todo salio bien
  */
 int mostrarUnidadPerro(Perro unPerro)
 {
@@ -53,15 +54,22 @@ int mostrarUnidadPerro(Perro unPerro)
 	}
 	return ok;
 }
+/**
+ * @fn void mostrarListaPerros(Perro*, int)
+ * @brief muestra el listado completo de elementos ingreados
+ *
+ * @param arrayPerros
+ * @param tam
+ */
 
 void mostrarListaPerros(Perro* arrayPerros, int tam)
 {
 	int conteoPerros=0;
-	for(int i = 0; i < tam; i++)
+	for(int i =0; i < tam; i++)
 	{
-		//+mostrarUnidadPerro(arrayPerros[i]);//notacion vectorial
-		//mostrarUnidadPerro(*(arrayPerros + i));//notacion de pùntero
-		if(mostrarUnidadPerro(*(arrayPerros + i))==0){
+		//printf("\nmostrar I valor: %d\n", i);
+		if(mostrarUnidadPerro(arrayPerros[i]) == 0)
+		{
 			conteoPerros++;
 		}
 	}
@@ -69,6 +77,13 @@ void mostrarListaPerros(Perro* arrayPerros, int tam)
 	printf("\n Cantidad de perros :%d \n",conteoPerros );
 }
 
+/**
+ * @fn void cargarPerrosHarcode(Perro*, int*)
+ * @brief harcodeo de algunos elementos
+ *
+ * @param arrayPerros
+ * @param id
+ */
 void cargarPerrosHarcode(Perro* arrayPerros, int* id)
 {
 		Perro bufferPerrito[] =
@@ -85,22 +100,37 @@ void cargarPerrosHarcode(Perro* arrayPerros, int* id)
 		}
 }
 
-
+/**
+ * @fn int eliminarPerro(Perro*)
+ * @brief borra un elemento del array
+ *
+ * @param unidadPerro
+ * @return  0 en caso de exito, -1 en caso contrario
+ */
 int eliminarPerro(Perro* unidadPerro)
 {
 	int retorno=-1;
 
 	if(unidadPerro!=NULL)
 	{
-		unidadPerro->isEmpty=0;
+		(*unidadPerro).isEmpty=0;
 		retorno =0 ;
 	}
 	return retorno;
 }
 
+/**
+ * @fn int findEmpty(Perro*, int)
+ * @brief recibe por parametro el array de tipo perro y su tamaño, recorre cada a elemento y compara el valor
+ * del campo isEmpty con 0 (ha encontrado un lugar libre), si NO es 0 la posicion esta ocupada.
+ *
+ * @param arrayPerrito
+ * @param tam
+ * @return retorna la variable indice, que toma el valor de i cuando esta coincide con el valor 0.
+ */
 int findEmpty(Perro* arrayPerrito, int tam)
 {
-	int indice;
+	int indice = -1;
 
 	if(arrayPerrito != NULL)
 	{
@@ -109,37 +139,59 @@ int findEmpty(Perro* arrayPerrito, int tam)
 			if(arrayPerrito[i].isEmpty == 0)
 			{
 				indice = i;
+				break;
 			}
 		}
 	}
 	return indice;
 }
 
+/**
+ * @fn int altaPerrito(Perro*, int, int*)
+ * @brief recibe por paramentro un puntero al array que va a ser modificado, el tamaño y un puntero a la variable
+ * id; luego de ubicar un lugar libre con la funcion isEmpty, pide los datos al usuario y los mismos se pasan
+ * como argumento a la funcion add que ubica los datos en la estructura.
+ *
+ * @param arrayPerrito
+ * @param tam
+ * @param id
+ * @return  0 si todo salio bien, - si hubo errores.
+ */
 int altaPerrito(Perro* arrayPerrito, int tam, int* id)
 {
 	int retorno = -1;
-	int indice;
+	int i;
 	Perro bufferPerrito;
 
 	if(arrayPerrito != NULL)
 	{
-		indice = findEmpty(arrayPerrito, tam);
+		i = findEmpty(arrayPerrito, tam);
 
-		if(utn_nombreOapellido(bufferPerrito.nombre, "Ingrese el nombre del perro: ", "Error. Reingrese el nombre."
-				, TAM,1 ) == 0 && utn_nombreOapellido(bufferPerrito.raza, "Ingrese la raza: ", "Error. Reingrese la raza.", TAM, 1) == 0
-				&& utn_getNumber(&bufferPerrito.edad, "Ingrese la edad: ", "Error. Reingrese la edad.", 1,50, 1) == 0)
+		if(i != -1 && utn_nombreOapellido(bufferPerrito.nombre, "\nIngrese el nombre del perro: ", "\nError. Reingrese el nombre.\n"
+			, TAM,1 ) == 0 && utn_nombreOapellido(bufferPerrito.raza, "\nIngrese la raza: ", "\nError. Reingrese la raza.\n", TAM, 1) == 0
+			&& utn_getNumber(&bufferPerrito.edad, "\nIngrese la edad: ", "\nError. Reingrese la edad.\n", 1,50, 1) == 0)
 		{
-			addPerrito(&arrayPerrito[indice], tam, id, bufferPerrito.nombre, bufferPerrito.raza, bufferPerrito.edad);
+			addPerrito(&arrayPerrito[i], tam, id, bufferPerrito.nombre, bufferPerrito.raza, bufferPerrito.edad);
+			retorno = 0;
 		}
-		else
-		{
-			printf("No se han podido cargar correctamente los datos. Vuelva a intentarlo.");
-		}
+
 	}
 
 	return retorno;
 }
 
+/**
+ * @fn int addPerrito(Perro*, int, int*, char*, char*, int)
+ * @brief ubica los datos pedidos por paramentro en la estructura
+ *
+ * @param pUnidadPerrito
+ * @param len
+ * @param id
+ * @param name
+ * @param race
+ * @param age
+ * @return - si hubo error, 0 si todo funciono bien
+ */
 int addPerrito(Perro* pUnidadPerrito, int len, int* id, char* name, char* race, int age)
 {
 	int retorno = -1;
@@ -147,45 +199,75 @@ int addPerrito(Perro* pUnidadPerrito, int len, int* id, char* name, char* race, 
 	if(pUnidadPerrito != NULL && id != NULL && name != NULL && race != NULL)
 	{
 
+		(*pUnidadPerrito).isEmpty = 1;
 		strcpy((*pUnidadPerrito).nombre, name);
 		strcpy((*pUnidadPerrito).raza, race);
 		(*pUnidadPerrito).edad = age;
-		(*pUnidadPerrito).isEmpty = 1;
-		(*pUnidadPerrito).id = *id++;
+		(*pUnidadPerrito).id = (*id)++;
 		retorno = 0;
 	}
 
 	return retorno;
 }
 
-
-int menuModificar(Perro* arrayPerritos, int len)
+/**
+ * @fn int menuModificar(Perro*, int)
+ * @brief menu que muestra el cartel con las instrucciones ara que el usuario
+ * valla mofidificando los datos.
+ *
+ * @param arrayPerritos
+ * @param len
+ * @return retorna el numero de la opcion seleccionada.
+ */
+int menuModificar(Perro* arrayPerritos, int len, int* indice, int* option)
 {
-	int option;
-	int id;
-	int indice;
 
-	printf("\n***** MODIFICAR DATOS *****");
+	int retorno = -1;
+	int idBuscado;
 
-		if( utn_getNumber(&id, "\nIngrese el ID del perro que desea modificar: ","\nError. Reingrese el ID."
-				, 7000, 10000, 1) == 0)
+	if(arrayPerritos != NULL)
+	{
+
+		printf("\n***** MODIFICAR DATOS *****\n");
+
+		mostrarListaPerros(arrayPerritos, len);
+
+		if( utn_getNumber(&idBuscado, "\nIngrese el ID del perro que desea modificar: ","\nError. Reingrese el ID."
+				, 7000, 10000, 1) == 0 && findById(arrayPerritos, len, idBuscado, indice) == 0)
 		{
-			findById(arrayPerritos, len, id, &indice);
-			printf("El perrito que se desea modificar es el: %d",indice);
-
-			if(utn_getNumber(&option, "\nIngrese la opcion del dato que desea modificar: "
-					"\n1.Nombre: "
-					"\n2.Raza: "
-					"\n3.Edad: ",
-					"\nError. Reingrese la opcion. "
-					, 1, 3, 1) == 0)
+			if(utn_getNumber(option, "\nIngrese la opcion del dato que desea modificar:"
+					"\n1. NOMBRE."
+					"\n2. RAZA."
+					"\n3. EDAD. "
+					"\n4. SALIR. ", "Error. Reingrese la opcion", 1, 4, 1) == 0)
 			{
-				printf("\nUsted ha ingresado la opcion nº %d", option);
+				printf("\nUsted ha ingresado la opcion nº %d", *option);
+				retorno = 0;
+
 			}
+
 		}
-		return option;
+		else
+		{
+			printf("\nEl ID ingreado es inexistente.");
+		}
+
+	}
+
+	return retorno;
 }
 
+/**
+ * @fn int findById(Perro*, int, int, int*)
+ * @brief busca el id ingresado en cada elemento del array, y al encontrarlo devuelde por puntero el
+ * la ubicacion especifica del elemento segun su indice
+ *
+ * @param arrayPerritos
+ * @param tam
+ * @param id
+ * @param indice
+ * @return
+ */
 int findById(Perro* arrayPerritos, int tam, int id, int* indice)
 {
 	int retorno = -1;
@@ -194,7 +276,7 @@ int findById(Perro* arrayPerritos, int tam, int id, int* indice)
 	{
 		for(int i = 0; i < tam; i++)
 		{
-			if(arrayPerritos[i].id == id)
+			if(arrayPerritos[i].isEmpty == 1 && arrayPerritos[i].id == id)
 			{
 				*indice = i;
 				retorno = 0;
@@ -206,51 +288,133 @@ int findById(Perro* arrayPerritos, int tam, int id, int* indice)
 
 }
 
+
+/**
+ * @fn int modificarPerrito(Perro*, int)
+ * @brief segun la eleccion del ususario va modificando cada uno de los datos del elemento.
+ *
+ * @param arrayPerritos
+ * @param len
+ * @return
+ */
 int modificarPerrito(Perro* arrayPerritos, int len)
 {
 	int retorno = -1;
+	int indice;
 	int option;
 	Perro bufferPerrito;
 
-	if(arrayPerritos != NULL)
+	if(arrayPerritos != NULL )
 	{
-		option = menuModificar(arrayPerritos, len);
-
-		switch(option)
+		do
 		{
-			case 1:
-				if(utn_nombreOapellido(bufferPerrito.nombre,"I\nngrese el nombre: "
-						, "\nError. Reingrese el nombre.", TAM, 1) == 0)
-				{
-					printf("\nEl nuevo nombre es: %s", bufferPerrito.nombre);
-					strcpy((*arrayPerritos).nombre,bufferPerrito.nombre);
-				}
-				else
-				{
-					printf("\nNo se ha podido realizar la modificacion de manera correcta");
-				}
-				break;
-			case 2:
-				if(utn_nombreOapellido(bufferPerrito.raza, "\nIngrese la raza: "
-						, "\nError. Reingrese la raza", TAM, 1) == 0)
-				{
-					printf("\nLa nueva raza es: %s", bufferPerrito.raza);
-					strcpy((*arrayPerritos).raza, bufferPerrito.raza);
-				}
-				break;
-			case 3:
-				if(utn_getNumber(&bufferPerrito.edad, "\nIngrese la edad: "
-						, "\nError. Reingrese la edad.", 1, 50, 1) == 0)
-				{
-					printf("\nLa nueva edad es: %d", bufferPerrito.edad);
-					(*arrayPerritos).edad = bufferPerrito.edad;
-				}
-				break;
-         retorno = 0;
+			if(menuModificar(arrayPerritos, len, &indice, &option ) == 0)
+		{
+			switch(option)
+			{
+				case 1:
+					if(utn_nombreOapellido(bufferPerrito.nombre,"\nIngrese el nombre: "
+							, "\nError. Reingrese el nombre.", TAM, 1) == 0)
+					{
+						printf("\nEl nuevo nombre es: %s", bufferPerrito.nombre);
+						strcpy(arrayPerritos[indice].nombre,bufferPerrito.nombre);
+					}
+					else
+					{
+						printf("\nNo se ha podido realizar la modificacion de manera correcta");
+					}
+					break;
+				case 2:
+					if(utn_nombreOapellido(bufferPerrito.raza, "\nIngrese la raza: "
+							, "\nError. Reingrese la raza", TAM, 1) == 0)
+					{
+						printf("\nLa nueva raza es: %s", bufferPerrito.raza);
+						strcpy(arrayPerritos[indice].raza, bufferPerrito.raza);
+					}
+					break;
+				case 3:
+					if(utn_getNumber(&bufferPerrito.edad, "\nIngrese la edad: "
+							, "\nError. Reingrese la edad.", 1, 50, 1) == 0)
+					{
+						printf("\nLa nueva edad es: %d", bufferPerrito.edad);
+						arrayPerritos[indice].edad = bufferPerrito.edad;
+					}
+					break;
+				case 4:
+					printf(" Salir.");
+					break;
+			}
+			retorno = 0;
 		}
+
+		}while(option != 4);
 	}
 
+	return retorno;
+}
 
+/**
+ * @fn int menuPerrito()
+ * @brief menu que muestra un cartel con las opciones de ABM
+ *
+ * @return
+ */
+int menuPerrito()
+{
+	int option;
+
+
+	printf("\n***** MENU ABM PERRITO *****\n");
+
+	if(utn_getNumber(&option, "\nIngrese la opcion que desee realizar: "
+				"\n1.Dar de alta un perrito. "
+				"\n2.Dar de Baja un perrito. "
+				"\n3.Modificar un perrito."
+				"\n4.Listar todos los perritos."
+				"\n5.Salir. "
+				, "\nError. Reingrese la opcion. \n"
+				, 1, 5, 1) == 0)
+	{
+		printf("\nUsted ha ingresado la opcion nº %d\n", option);
+
+	}
+
+return option;
+
+}
+
+/**
+ * @fn int darDeBajaPerrito(Perro*, int)
+ * @brief elimina un elemento del array, mediante el ingreso del ID del mismo
+ *
+ * @param arrayPerritos
+ * @param len
+ * @return
+ */
+int darDeBajaPerrito(Perro* arrayPerritos, int len)
+{
+	int retorno = -1;
+	int id;
+	int indice;
+
+	if(arrayPerritos != NULL)
+	{
+		printf("\n***** DAR DE BAJA UN PERRITO *****\n");
+
+		mostrarListaPerros(arrayPerritos, len);
+
+		if( utn_getNumber(&id, "\nIngrese el ID del perro que desea eliminar: ","\nError. Reingrese el ID."
+					, 7000, 10000, 1) == 0 && findById(arrayPerritos, len, id, &indice) == 0)
+
+		{
+			if(eliminarPerro(&arrayPerritos[indice]) == 0)
+			{
+				retorno = 0;
+			}
+		}
+
+
+	}
 
 	return retorno;
 }
