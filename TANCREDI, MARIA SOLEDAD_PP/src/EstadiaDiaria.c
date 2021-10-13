@@ -12,12 +12,13 @@
 #include <stdio_ext.h>
 #include "BibliotecaUtn2021.h"
 #include "EstadiaDiaria.h"
+#include "Perros.h"
 
-int menu()
+int menuEstadia()
 {
 	int option;
 
-	printf("***** ESTADIAS DIARIAS *****");
+	printf("\n***** ESTADIAS DIARIAS *****\n");
 
 	if(utn_getNumber(&option, "Ingrese la opcion que desee realizar: "
 			"\n1.Reservar estadia: "
@@ -48,19 +49,27 @@ void inicializarEstadia(EstadiaDiaria* array, int tam)
 	}
 }
 
+void cargarEstadiaHarcode(EstadiaDiaria* unidadEstadia, int* id)
+{
+
+		(*id)++;
+}
+
 
 int mostrarUnidadEstadia(EstadiaDiaria unaEstadia)
 {
 	int ok=-1;
+
 	if(unaEstadia.isEmpty == 1)
 	{
 		ok=0;
-		printf("\n**Datos del Perro**");
+		printf("\n****DATOS DE LA ESTADIA****");
 		printf("\nID: %d", unaEstadia.id);
-		printf("\nNOMBRE DUENIO: %s ", unaEstadia.nombreDuenio);
+		printf("\nNOMBRE DUEÑO: %s ", unaEstadia.nombreDuenio);
 		printf("\nTELEFONO CONTACTO: %s", unaEstadia.telefonoContacto);
 		printf("\nID PERRO: %d", unaEstadia.idPerro);
-		// IMPRIMIR FECHA
+		printf("\nFECHA: %d / %d / %d", (unaEstadia).fechaEstadia.dia,
+				(unaEstadia).fechaEstadia.mes, (unaEstadia).fechaEstadia.anio);
 		printf("\n------------------------------");
 	}
 	return ok;
@@ -72,7 +81,7 @@ void mostrarListaEstadias(EstadiaDiaria* arrayEstadias, int tam)
 	for(int i =0; i < tam; i++)
 	{
 		//printf("\nmostrar I valor: %d\n", i);
-		if(mostrarUnidadPerro(arrayEstadias[i]) == 0)
+		if(mostrarUnidadEstadia(arrayEstadias[i]) == 0)
 		{
 			conteoEstadias++;
 		}
@@ -96,7 +105,7 @@ int eliminarEstadia(EstadiaDiaria* unidadEstadia)
 }
 
 
-int findEmpty(EstadiaDiaria* arrayEstadia, int tam)
+int findEmptyEstadia(EstadiaDiaria* arrayEstadia, int tam)
 {
 	int indice = -1;
 
@@ -114,9 +123,30 @@ int findEmpty(EstadiaDiaria* arrayEstadia, int tam)
 	return indice;
 }
 
+int addEstadia(EstadiaDiaria* unidadEstadia,int* id, char* nombreDuenio, char* telefono, int idPerro, int dia, int mes, int anio)
+{
+	int retorno = -1;
+
+	if(unidadEstadia != NULL && nombreDuenio != NULL && telefono != NULL)
+	{
+		(*unidadEstadia).isEmpty = 1;
+		(*unidadEstadia).id = *id;
+		strcpy((*unidadEstadia).nombreDuenio, nombreDuenio);
+		strcpy((*unidadEstadia).telefonoContacto,telefono);
+		(*unidadEstadia).idPerro = idPerro;
+		(*unidadEstadia).fechaEstadia.dia = dia;
+		(*unidadEstadia).fechaEstadia.mes = mes;
+		(*unidadEstadia).fechaEstadia.anio = anio;
+		(*id)++;
+		retorno = 0;
+
+	}
+
+	return retorno;
+}
 
 
-int addEstadia(Perro* pUnidadPerrito, int len, int* id, char* name, char* race, int age)
+/*int addEstadia(Perro* pUnidadPerrito, int len, int* id, char* name, char* race, int age)
 {
 	int retorno = -1;
 
@@ -132,18 +162,18 @@ int addEstadia(Perro* pUnidadPerrito, int len, int* id, char* name, char* race, 
 	}
 
 	return retorno;
-}
+}*/
 
 
-int findById(Perro* arrayPerritos, int tam, int id, int* indice)
+int findByIdEstadia(EstadiaDiaria* arrayEstadia, int tam, int id, int* indice)
 {
 	int retorno = -1;
 
-	if(arrayPerritos != NULL && indice != NULL)
+	if(arrayEstadia != NULL && indice != NULL)
 	{
 		for(int i = 0; i < tam; i++)
 		{
-			if(arrayPerritos[i].isEmpty == 1 && arrayPerritos[i].id == id)
+			if(arrayEstadia[i].isEmpty == 1 && arrayEstadia[i].id == id)
 			{
 				*indice = i;
 				retorno = 0;

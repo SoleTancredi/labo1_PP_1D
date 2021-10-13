@@ -18,6 +18,7 @@ int utn_ordenarArrayDecreciente(int* array, int tam);
 int utn_mostrarNumeros(int* array, char* mensaje, int tam);
 int inicializacionArray(int array[], int tam);
 int utn_promedio(int numerador, int denominador, float* pResultadoF);
+int utn_telephoneNumber(char* string, char* mensaje, char* mensajeError, int tam, int reintentos);
 
 
 

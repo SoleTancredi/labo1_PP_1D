@@ -18,14 +18,31 @@
 #include "EstadiaDiaria.h"
 #define CANT_P 10
 #define CANT_E 30
+#define CANT_F 30
 
 
 int main(void)
 {
 	EstadiaDiaria arrayEstadias[CANT_E];
-	int id = 100.000;
-	int opcion;
-	int flagReserva = 0;
+	Perro arrayPerros[CANT_P];
+	int idPerro = 7000;
+	int id = 100000;
+
+
+	//distinto harcode
+	cargarPerrosHarcode(arrayPerros, &idPerro);
+	addEstadia(&arrayEstadias[0], &id, "Carlos", "1123456789", 7002,02,03,1998);
+	addEstadia(&arrayEstadias[1], &id, "Pedro", "1123456711", 7003,20,12,2020);
+
+
+
+
+
+
+
+
+
+
 
 
 

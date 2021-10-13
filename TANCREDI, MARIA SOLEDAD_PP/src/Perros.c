@@ -1,5 +1,5 @@
 /*
- * Dogs.c
+ * Perros.c
  *
  *  Created on: 7 oct. 2021
  *      Author: sole
@@ -12,6 +12,7 @@
 #include <stdio_ext.h>
 #include "BibliotecaUtn2021.h"
 #include "Perros.h"
+#include "EstadiaDiaria.h"
 
 /**
  * @fn void inicializarPerro(Perro*, int)

@@ -10,19 +10,34 @@
 #define TAM_NOMBRE 20
 #define TAM_TEL 15
 
+
+struct
+{
+	int dia;
+	int mes;
+	int anio;
+
+}typedef Fecha;
+
 struct
 {
 	int id;
 	char nombreDuenio[TAM_NOMBRE];
 	char telefonoContacto[TAM_TEL];
 	int idPerro;
-	int fecha;
 	int isEmpty;
-
+	Fecha fechaEstadia;
 
 }typedef EstadiaDiaria;
 
-int menu();
+
+
+int menuEstadia();
+int mostrarUnidadEstadia(EstadiaDiaria unaEstadia);
+int eliminarEstadia(EstadiaDiaria* unidadEstadia);
+int findEmptyEstadia(EstadiaDiaria* arrayEstadia, int tam);
+int findByIdEstadia(EstadiaDiaria* arrayEstadia, int tam, int id, int* indice);
+int addEstadia(EstadiaDiaria* unidadEstadia,int* id, char* nombreDuenio, char* telefono, int idPerro, int dia, int mes, int anio);
 
 
 #endif /* ESTADIADIARIA_H_ */

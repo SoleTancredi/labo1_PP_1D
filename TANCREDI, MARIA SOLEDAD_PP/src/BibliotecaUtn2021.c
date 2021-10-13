@@ -19,6 +19,7 @@ static int esLetra(char* cadena);
 static int esFloat(char* cadena);
 static int getFloat(float* pResultadoF);
 static int ArrayIsEmpty(char* array);
+static int esCifra(char* cadena);
 
 /**
  * @fn int ArrayIsEmpty(char*)
@@ -187,6 +188,27 @@ static int esLetra(char* cadena)
 	for(; cadena[i] != '\0'; i++)
 	{
 		if((cadena[i] >= 'A' && cadena[i] <= 'Z') || (cadena[i] >= 'a' && cadena[i] <= 'z'))
+		{
+			retorno = 1;
+		}
+		else
+		{
+			retorno = 0;
+			break;
+		}
+
+	}
+	return retorno;
+}
+
+static int esCifra(char* cadena)
+{
+	int retorno = -1;
+	int i = 0;
+
+	for(; cadena[i] != '\0'; i++)
+	{
+		if(cadena[i] >= 48 && cadena[i] <= 57)
 		{
 			retorno = 1;
 		}
@@ -575,6 +597,44 @@ int utn_promedio(int numerador, int denominador, float* pResultadoF)
 
 	 return retorno;
 
+}
+
+int utn_telephoneNumber(char* string, char* mensaje, char* mensajeError, int tam, int reintentos)
+{
+	int retorno = -1;
+	char buffer[4096];
+	int retornoMyGets;
+	int retornoEsCifra;
+
+	if(string != NULL && mensaje != NULL && mensajeError != NULL)
+	{
+		do
+		{
+		   printf("%s\n", mensaje);
+
+		   retornoMyGets = myGets(buffer, sizeof(buffer));
+		   retornoEsCifra = esCifra(buffer);
+
+			if(retornoMyGets == 0 && retornoEsCifra == 1 )
+			{
+			   retorno = 0;
+		       strcpy(string, buffer);
+		       break;
+			}
+			else
+			{
+				printf("%s\n", mensajeError);
+				reintentos --;
+			}
+
+		}while(reintentos >= 0);
+
+		if(reintentos < 0)
+		{
+			printf("\nSe quedo sin intentos para ingresar correctamente sus datos.\n");
+		}
+	}
+	return retorno;
 }
 
 
