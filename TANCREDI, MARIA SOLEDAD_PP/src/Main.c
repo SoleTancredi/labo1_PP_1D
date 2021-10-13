@@ -20,17 +20,21 @@
 #define CANT_E 30
 
 
-int main(void) {
+int main(void)
+{
+	EstadiaDiaria arrayEstadias[CANT_E];
+	int id = 100.000;
+	int opcion;
+	int flagReserva = 0;
 
-   Perro arrayPerros[CANT_P];
+
+
+   /*Perro arrayPerros[CANT_P];
    int idPerro = 7000;
    int opcion;
    int flagCarga = 0;
-
-
    inicializarPerro(arrayPerros, CANT_P);
-
-
+   cargarPerrosHarcode(arrayPerros, &idPerro);
    do
    {
 	   opcion = menuPerrito();
@@ -38,7 +42,7 @@ int main(void) {
 	     switch(opcion)
 	     {
 	  		case 1:
-	  			cargarPerrosHarcode(arrayPerros, &idPerro);
+
 	  			if(altaPerrito(arrayPerros, CANT_P, &idPerro) == 0)
 	  			{
 	  				flagCarga = 1;
@@ -85,9 +89,7 @@ int main(void) {
 	  			printf("FIN DEL PROGRAMA.");
 	  		   break;
 	     }
-
-
-   }while(opcion != 5);
+   }while(opcion != 5);*/
 
 
 
