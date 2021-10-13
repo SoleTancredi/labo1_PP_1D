@@ -30,9 +30,15 @@ int main(void)
 
 
 	//distinto harcode
+	inicializarEstadia(arrayEstadias, CANT_E);
 	cargarPerrosHarcode(arrayPerros, &idPerro);
 	addEstadia(&arrayEstadias[0], &id, "Carlos", "1123456789", 7002,02,03,1998);
 	addEstadia(&arrayEstadias[1], &id, "Pedro", "1123456711", 7003,20,12,2020);
+	//mostrarListaEstadias(arrayEstadias, CANT_E);
+
+	registrarEstadia(arrayEstadias, CANT_E, &id, arrayPerros, CANT_P);
+	mostrarListaEstadias(arrayEstadias, CANT_E);
+
 
 
 

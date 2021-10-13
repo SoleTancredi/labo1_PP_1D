@@ -11,8 +11,9 @@
 #include <ctype.h>
 #include <stdio_ext.h>
 #include "BibliotecaUtn2021.h"
-#include "EstadiaDiaria.h"
 #include "Perros.h"
+#include "EstadiaDiaria.h"
+
 
 int menuEstadia()
 {
@@ -49,13 +50,6 @@ void inicializarEstadia(EstadiaDiaria* array, int tam)
 	}
 }
 
-void cargarEstadiaHarcode(EstadiaDiaria* unidadEstadia, int* id)
-{
-
-		(*id)++;
-}
-
-
 int mostrarUnidadEstadia(EstadiaDiaria unaEstadia)
 {
 	int ok=-1;
@@ -87,7 +81,7 @@ void mostrarListaEstadias(EstadiaDiaria* arrayEstadias, int tam)
 		}
 	}
 
-	printf("\n Cantidad de perros :%d \n", conteoEstadias);
+	printf("\n Cantidad de estadias :%d \n", conteoEstadias);
 }
 
 
@@ -123,6 +117,27 @@ int findEmptyEstadia(EstadiaDiaria* arrayEstadia, int tam)
 	return indice;
 }
 
+
+int findByIdEstadia(EstadiaDiaria* arrayEstadia, int tam, int id, int* indice)
+{
+	int retorno = -1;
+
+	if(arrayEstadia != NULL && indice != NULL)
+	{
+		for(int i = 0; i < tam; i++)
+		{
+			if(arrayEstadia[i].isEmpty == 1 && arrayEstadia[i].id == id)
+			{
+				*indice = i;
+				retorno = 0;
+			}
+		}
+	}
+
+	return retorno;
+
+}
+
 int addEstadia(EstadiaDiaria* unidadEstadia,int* id, char* nombreDuenio, char* telefono, int idPerro, int dia, int mes, int anio)
 {
 	int retorno = -1;
@@ -145,45 +160,57 @@ int addEstadia(EstadiaDiaria* unidadEstadia,int* id, char* nombreDuenio, char* t
 	return retorno;
 }
 
-
-/*int addEstadia(Perro* pUnidadPerrito, int len, int* id, char* name, char* race, int age)
+int registrarEstadia(EstadiaDiaria* arrayEstadia, int tam, int* id, Perro* arrayPerro, int tamP)
 {
 	int retorno = -1;
+	int i;
+	EstadiaDiaria bufferE;
 
-	if(pUnidadPerrito != NULL && id != NULL && name != NULL && race != NULL)
+	if(arrayEstadia != NULL && id != NULL)
 	{
+		i = findEmptyEstadia(arrayEstadia, tam);
 
-		(*pUnidadPerrito).isEmpty = 1;
-		strcpy((*pUnidadPerrito).nombre, name);
-		strcpy((*pUnidadPerrito).raza, race);
-		(*pUnidadPerrito).edad = age;
-		(*pUnidadPerrito).id = (*id)++;
-		retorno = 0;
-	}
-
-	return retorno;
-}*/
-
-
-int findByIdEstadia(EstadiaDiaria* arrayEstadia, int tam, int id, int* indice)
-{
-	int retorno = -1;
-
-	if(arrayEstadia != NULL && indice != NULL)
-	{
-		for(int i = 0; i < tam; i++)
+		if(i != -1 && utn_nombreOapellido(bufferE.nombreDuenio,"\nIngrese el nombre del dueño: "
+			,"\nError. Reingrese el nombre.", tam, 1) == 0 && utn_telephoneNumber(bufferE.telefonoContacto,
+			"\nIngrese el telefono de contacto: ", "\nError. Reingrese el telefono.", tam, 1) == 0
+			&& utn_getNumber(&bufferE.fechaEstadia.dia, "\nIngrese la fecha: \nDia: ","\nError. Reintente."
+			,1, 31, 1) == 0 && utn_getNumber(&bufferE.fechaEstadia.mes, "\nMes: ","\nError. Reintente."
+			, 1, 12,1) == 0 && utn_getNumber(&bufferE.fechaEstadia.anio, "\nAño: ", "\nError. Reintente.", 1990, 2021, 1)  == 0)
 		{
-			if(arrayEstadia[i].isEmpty == 1 && arrayEstadia[i].id == id)
+			mostrarListaPerros(arrayPerro, tamP);
+			if(utn_getNumber(&bufferE.idPerro, "\nIngrese el ID del perro:", "\nError.Reingrese.", 7000, 10000, 1) == 0)
 			{
-				*indice = i;
-				retorno = 0;
+				int indexPerro=0;
+				if(indexById(arrayPerro, tam,bufferE.idPerro,&indexPerro)==0)
+				{// INDEXBY ID  SALARY BY ID NAME BY ID
+					if(addEstadia(&arrayEstadia[i], id,bufferE.nombreDuenio, bufferE.telefonoContacto, bufferE.idPerro, bufferE.fechaEstadia.dia, bufferE.fechaEstadia.mes, bufferE.fechaEstadia.anio) == 0)
+					{
+						// IDBY NAME ID BY SALARY ID BY LO K SEA
+						printf("perfecto");
+						retorno = 0;
+					}
+				}
+				else
+				{
+					printf("No se ha pudido");
+				}
+
 			}
+
 		}
+
 	}
 
-	return retorno;
 
+
+
+
+
+
+	return retorno;
 }
+
+
 
 
 

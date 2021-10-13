@@ -234,7 +234,7 @@ int menuModificar(Perro* arrayPerritos, int len, int* indice, int* option)
 		mostrarListaPerros(arrayPerritos, len);
 
 		if( utn_getNumber(&idBuscado, "\nIngrese el ID del perro que desea modificar: ","\nError. Reingrese el ID."
-				, 7000, 10000, 1) == 0 && findById(arrayPerritos, len, idBuscado, indice) == 0)
+				, 7000, 10000, 1) == 0 && indexById(arrayPerritos, len, idBuscado, indice) == 0)
 		{
 			if(utn_getNumber(option, "\nIngrese la opcion del dato que desea modificar:"
 					"\n1. NOMBRE."
@@ -269,7 +269,7 @@ int menuModificar(Perro* arrayPerritos, int len, int* indice, int* option)
  * @param indice
  * @return
  */
-int findById(Perro* arrayPerritos, int tam, int id, int* indice)
+int indexById(Perro* arrayPerritos, int tam, int id, int* indice)
 {
 	int retorno = -1;
 
@@ -405,7 +405,7 @@ int darDeBajaPerrito(Perro* arrayPerritos, int len)
 		mostrarListaPerros(arrayPerritos, len);
 
 		if( utn_getNumber(&id, "\nIngrese el ID del perro que desea eliminar: ","\nError. Reingrese el ID."
-					, 7000, 10000, 1) == 0 && findById(arrayPerritos, len, id, &indice) == 0)
+					, 7000, 10000, 1) == 0 && indexById(arrayPerritos, len, id, &indice) == 0)
 
 		{
 			if(eliminarPerro(&arrayPerritos[indice]) == 0)
