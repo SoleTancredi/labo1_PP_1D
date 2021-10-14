@@ -22,15 +22,15 @@ int menuEstadia()
 	printf("\n########## ESTADIAS DIARIAS ##########\n\n");
 
 	if(utn_getNumber(&option, "Ingrese la opcion que desee realizar: "
-			"\n1.Reservar estadia: "
-			"\n2.Modificar estadia: "
-			"\n3.Cancelar estadia: "
-			"\n4.Listar estadias: "
-			"\n5.ORD Listar perros: "
-			"\n6.Promedio de edad de los perros: "
-			"\n7.Salir."
+			"\n1.RESERVAR ESTADIA. "
+			"\n2.MODIFICAR ESTADIA. "
+			"\n3.CANCELAR ESTADIA. "
+			"\n4.LISTAR ESTADIAS. "
+			"\n5.ORD LISTAR PERROS. "
+			"\n6.PROMEDIO DE EDAD DE LOS PERROS. "
+			"\n7.FINALIZAR."
 			, "Error. Reingrese la opcion. "
-			, 1, 6, 1) == 0)
+			, 1, 7, 1) == 0)
 	{
 		printf("Usted ha ingresado la opcion nº %d", option);
 
