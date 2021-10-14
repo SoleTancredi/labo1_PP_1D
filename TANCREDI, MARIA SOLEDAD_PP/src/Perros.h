@@ -19,6 +19,7 @@ struct
 
 }typedef Perro;
 
+int menuPerrito();
 void inicializarPerro(Perro* array, int tam);
 int mostrarUnidadPerro(Perro unPerro);
 void mostrarListaPerros(Perro* arrayPerros, int tam);
@@ -30,7 +31,6 @@ int addPerrito(Perro* pUnidadPerrito, int len, int* id, char* name, char* race, 
 int menuModificar(Perro* arrayPerritos, int len, int* indice, int* option);
 int modificarPerrito(Perro* arrayPerritos, int len);
 int indexById(Perro* arrayPerritos, int tam, int id, int* indice);
-int menuPerrito();
 int darDeBajaPerrito(Perro* arrayPerritos, int len);
 int validIdPerro(Perro* arrayPerritos, int tam, int id);
 int contadorPerros(Perro* arrayPerro, int len);

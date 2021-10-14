@@ -32,6 +32,10 @@ int main(void)
 	inicializarEstadia(arrayEstadias, CANT_E);
 	inicializarPerro( arrayPerros,CANT_P);
 	cargarPerrosHarcode(arrayPerros, &idPerro);
+	addEstadia(&arrayEstadias[0], &id, "ABEL", "4545454545", 7001 ,20,12,2020);
+	addEstadia(&arrayEstadias[1], &id, "Carlos", "1123456789", 7002,02,03,1998);
+	addEstadia(&arrayEstadias[2], &id, "Pedro", "1123456711", 7000,20,12,2020);
+	addEstadia(&arrayEstadias[3], &id, "ZETA", "4545454545", 7001 ,17,12,2020);
 
 	do
 	{
@@ -40,11 +44,6 @@ int main(void)
 		switch(opcion)
 		{
 		case 1:
-
-			addEstadia(&arrayEstadias[0], &id, "ABEL", "4545454545", 7001 ,20,12,2020);
-			addEstadia(&arrayEstadias[1], &id, "Carlos", "1123456789", 7002,02,03,1998);
-			addEstadia(&arrayEstadias[2], &id, "Pedro", "1123456711", 7000,20,12,2020);
-			addEstadia(&arrayEstadias[3], &id, "ZETA", "4545454545", 7001 ,17,12,2020);
 
 			if(altaEstadia(arrayEstadias, CANT_E, &id, arrayPerros, CANT_P) == 0)
 			{
@@ -84,7 +83,7 @@ int main(void)
 			}
 			else
 			{
-				printf("\nNo se ha reservado ninguna estadia de ningun perrito por el momento.");
+				printf("\nAun no se ha reservado la estadia de ningun perrito. ");
 			}
 
 			break;
@@ -95,7 +94,7 @@ int main(void)
 			}
 			else
 			{
-				printf("\nNo se ha reservado ninguna estadia de ningun perrito por el momento.");
+				printf("\nAun no se ha reservado la estadia de ningun perrito. ");
 			}
 
 			break;
@@ -107,7 +106,7 @@ int main(void)
 			}
 			else
 			{
-				printf("\nNo se ha reservado ninguna estadia de ningun perrito por el momento.");
+				printf("\nAun no se ha reservado la estadia de ningun perrito. ");
 			}
 			break;
 		case 7:

@@ -14,6 +14,12 @@
 #include "Perros.h"
 #include "EstadiaDiaria.h"
 
+/**
+ * @fn int menuEstadia()
+ * @brief muestra el cartel Menu de opciones
+ *
+ * @return
+ */
 
 int menuEstadia()
 {
@@ -26,7 +32,7 @@ int menuEstadia()
 			"\n2.MODIFICAR ESTADIA. "
 			"\n3.CANCELAR ESTADIA. "
 			"\n4.LISTAR ESTADIAS. "
-			"\n5.ORD LISTAR PERROS. "
+			"\n5.LISTAR PERROS. "
 			"\n6.PROMEDIO DE EDAD DE LOS PERROS. "
 			"\n7.FINALIZAR."
 			, "Error. Reingrese la opcion. "
@@ -39,7 +45,13 @@ int menuEstadia()
 return option;
 
 }
-
+/**
+ * @fn void inicializarEstadia(EstadiaDiaria*, int)
+ * @brief inicializa el array
+ *
+ * @param array
+ * @param tam
+ */
 void inicializarEstadia(EstadiaDiaria* array, int tam)
 {
 	if(array != NULL && tam > 0)
@@ -51,6 +63,13 @@ void inicializarEstadia(EstadiaDiaria* array, int tam)
 	}
 }
 
+/**
+ * @fn int mostrarUnidadEstadia(EstadiaDiaria)
+ * @brief imprime un solo elemento de la estadia
+ *
+ * @param unaEstadia
+ * @return
+ */
 int mostrarUnidadEstadia(EstadiaDiaria unaEstadia)
 {
 	int ok=-1;
@@ -70,6 +89,13 @@ int mostrarUnidadEstadia(EstadiaDiaria unaEstadia)
 	return ok;
 }
 
+/**
+ * @fn void mostrarListaEstadias(EstadiaDiaria*, int)
+ * @brief imprime el array completo de elementos
+ *
+ * @param arrayEstadias
+ * @param tam
+ */
 void mostrarListaEstadias(EstadiaDiaria* arrayEstadias, int tam)
 {
 	int conteoEstadias=0;
@@ -86,7 +112,13 @@ void mostrarListaEstadias(EstadiaDiaria* arrayEstadias, int tam)
 }
 
 
-
+/**
+ * @fn int eliminarEstadia(EstadiaDiaria*)
+ * @brief da la baja logica de un elemento del array
+ *
+ * @param unidadEstadia
+ * @return
+ */
 int eliminarEstadia(EstadiaDiaria* unidadEstadia)
 {
 	int retorno=-1;
@@ -99,7 +131,14 @@ int eliminarEstadia(EstadiaDiaria* unidadEstadia)
 	return retorno;
 }
 
-
+/**
+ * @fn int findEmptyEstadia(EstadiaDiaria*, int)
+ * @brief encuntra un lugar vacio dentro del array
+ *
+ * @param arrayEstadia
+ * @param tam
+ * @return
+ */
 int findEmptyEstadia(EstadiaDiaria* arrayEstadia, int tam)
 {
 	int indice = -1;
@@ -118,7 +157,16 @@ int findEmptyEstadia(EstadiaDiaria* arrayEstadia, int tam)
 	return indice;
 }
 
-
+/**
+ * @fn int findByIdEstadia(EstadiaDiaria*, int, int, int*)
+ * @brief realiza la busqueda de un elemento mediante el Id y devuelve por referencia su ubicacion
+ *
+ * @param arrayEstadia
+ * @param tam
+ * @param id
+ * @param indice
+ * @return
+ */
 int findByIdEstadia(EstadiaDiaria* arrayEstadia, int tam, int id, int* indice)
 {
 	int retorno = -1;
@@ -138,7 +186,20 @@ int findByIdEstadia(EstadiaDiaria* arrayEstadia, int tam, int id, int* indice)
 	return retorno;
 
 }
-
+/**
+ * @fn int addEstadia(EstadiaDiaria*, int*, char*, char*, int, int, int, int)
+ * @brief toma por parametro los datos y los ubica en cada campo correspondiente en el elemento del array
+ *
+ * @param unidadEstadia
+ * @param id
+ * @param nombreDuenio
+ * @param telefono
+ * @param idPerro
+ * @param dia
+ * @param mes
+ * @param anio
+ * @return
+ */
 int addEstadia(EstadiaDiaria* unidadEstadia,int* id, char* nombreDuenio, char* telefono, int idPerro, int dia, int mes, int anio)
 {
 	int retorno = -1;
@@ -160,7 +221,17 @@ int addEstadia(EstadiaDiaria* unidadEstadia,int* id, char* nombreDuenio, char* t
 
 	return retorno;
 }
-
+/**
+ * @fn int altaEstadia(EstadiaDiaria*, int, int*, Perro*, int)
+ * @brief pide lo datos al usuario para que de de alta un nuevo elemento
+ *
+ * @param arrayEstadia
+ * @param tam
+ * @param id
+ * @param arrayPerro
+ * @param tamP
+ * @return
+ */
 int altaEstadia(EstadiaDiaria* arrayEstadia, int tam, int* id, Perro* arrayPerro, int tamP)
 {
 	int retorno = -1;
@@ -204,7 +275,15 @@ int altaEstadia(EstadiaDiaria* arrayEstadia, int tam, int* id, Perro* arrayPerro
 	return retorno;
 }
 
-
+/**
+ * @fn int subMenuModifEstadia(EstadiaDiaria*, int, int*)
+ * @brief muestra el cartel de un subMenu de opciones para realizar modificaciones
+ *
+ * @param arrayEstadia
+ * @param tam
+ * @param option
+ * @return
+ */
 int subMenuModifEstadia(EstadiaDiaria* arrayEstadia, int tam,int* option)
 {
 	int retorno = -1;
@@ -226,7 +305,15 @@ int subMenuModifEstadia(EstadiaDiaria* arrayEstadia, int tam,int* option)
 
 	return retorno;
 }
-
+/**
+ * @fn int modificarEstadia(EstadiaDiaria*, int, Perro*)
+ * @brief modifica algunos datos de la estadia segun eleccion del usuario
+ *
+ * @param arrayEstadia
+ * @param tam
+ * @param arrayPerritos
+ * @return
+ */
 int modificarEstadia(EstadiaDiaria* arrayEstadia, int tam, Perro* arrayPerritos)
 {
 	int retorno = -1;
@@ -285,6 +372,16 @@ int modificarEstadia(EstadiaDiaria* arrayEstadia, int tam, Perro* arrayPerritos)
 
 	return retorno;
 }
+
+/**
+ * @fn int validIdEstadia(EstadiaDiaria*, int, int)
+ * @brief valida la existencia de un Id
+ *
+ * @param arrayEstadia
+ * @param tam
+ * @param id
+ * @return
+ */
 int validIdEstadia(EstadiaDiaria* arrayEstadia, int tam, int id)
 {
 	int retorno = -1;
@@ -302,6 +399,16 @@ int validIdEstadia(EstadiaDiaria* arrayEstadia, int tam, int id)
 
 	return retorno;
 }
+
+/**
+ * @fn int ordenarEstadia(EstadiaDiaria*, int)
+ * @brief ordena por fecha cada elemento del array, en caso de tener igualdad de fechas ordena
+ * por orden alfabetico el nombre de los dueños
+ *
+ * @param arrayEstadia
+ * @param tam
+ * @return
+ */
 int ordenarEstadia(EstadiaDiaria* arrayEstadia,int tam)
 {
 	int retorno=-1;
@@ -381,6 +488,14 @@ int ordenarEstadia(EstadiaDiaria* arrayEstadia,int tam)
 	return retorno;
 }
 
+/**
+ * @fn int darDeBajaEstadia(EstadiaDiaria*, int)
+ * @brief elimina un elemento del array, segun el Id que ingrese el usuario
+ *
+ * @param arrayEstadia
+ * @param tam
+ * @return
+ */
 int darDeBajaEstadia(EstadiaDiaria* arrayEstadia, int tam)
 {
 	int retorno = -1;

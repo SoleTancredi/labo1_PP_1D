@@ -288,7 +288,15 @@ int indexById(Perro* arrayPerritos, int tam, int id, int* indice)
 	return retorno;
 
 }
-
+/**
+ * @fn int validIdPerro(Perro*, int, int)
+ * @brief valida la existencia del Id
+ *
+ * @param arrayPerritos
+ * @param tam
+ * @param id
+ * @return
+ */
 int validIdPerro(Perro* arrayPerritos, int tam, int id)
 {
 	int retorno = -1;
@@ -437,6 +445,14 @@ int darDeBajaPerrito(Perro* arrayPerritos, int len)
 
 	return retorno;
 }
+/**
+ * @fn int contadorPerros(Perro*, int)
+ * @brief cuenta la cantidad de perritos existentes
+ *
+ * @param arrayPerro
+ * @param len
+ * @return
+ */
 
 int contadorPerros(Perro* arrayPerro, int len)
 {
@@ -452,6 +468,14 @@ int contadorPerros(Perro* arrayPerro, int len)
 	return cantidad;
 }
 
+/**
+ * @fn float promedioEdadPerros(Perro*, int)
+ * @brief devuelve el promedio de edad de los perros ingresados
+ *
+ * @param arrayPerros
+ * @param len
+ * @return
+ */
 float promedioEdadPerros(Perro* arrayPerros, int len)
 {
 	float promedio;
