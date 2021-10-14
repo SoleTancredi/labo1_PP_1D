@@ -29,6 +29,7 @@ int main(void)
 	int id = 100000;
 	int flagReserva = 0;
 	int opcion;
+	float promedioEdadPerritos;
 
 	inicializarEstadia(arrayEstadias, CANT_E);
 	inicializarPerro( arrayPerros,CANT_P);
@@ -75,9 +76,14 @@ int main(void)
 
 			break;
 		case 5:
-
+			mostrarListaPerros(arrayPerros, CANT_P);
 			break;
 		case 6:
+			if(flagReserva == 1)
+			{
+				promedioEdadPerritos = promedioEdadPerros(arrayPerros, CANT_P);
+				printf("\nEl promedio de edad de los perros es: %.2f",promedioEdadPerritos);
+			}
 			break;
 		case 7:
 			printf("FIN DEL PROGRAMA");

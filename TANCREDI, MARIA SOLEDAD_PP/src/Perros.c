@@ -438,5 +438,41 @@ int darDeBajaPerrito(Perro* arrayPerritos, int len)
 	return retorno;
 }
 
+int contadorPerros(Perro* arrayPerro, int len)
+{
+	int cantidad = 0;
+
+	for(int i = 0; i < len; i++)
+	{
+		if(arrayPerro[i].isEmpty==1)
+		{
+			cantidad++;
+		}
+	}
+	return cantidad;
+}
+
+float promedioEdadPerros(Perro* arrayPerros, int len)
+{
+	float promedio;
+	int totalEdades = 0;
+	int cont;
+
+	if(arrayPerros != NULL)
+	{
+		for(int i = 0; i < len; i++)
+		{
+			if(arrayPerros[i].isEmpty==1)
+			{
+				totalEdades += arrayPerros[i].edad;
+			}
+		}
+		cont = contadorPerros(arrayPerros, len);
+		promedio = totalEdades / cont;
+	}
+
+	return promedio;
+}
+
 
 
