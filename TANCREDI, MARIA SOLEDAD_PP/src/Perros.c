@@ -289,6 +289,24 @@ int indexById(Perro* arrayPerritos, int tam, int id, int* indice)
 
 }
 
+int validIdPerro(Perro* arrayPerritos, int tam, int id)
+{
+	int retorno = -1;
+
+	if(arrayPerritos != NULL)
+		{
+			for(int i = 0; i < tam; i++)
+			{
+				if(arrayPerritos[i].isEmpty == 1 && arrayPerritos[i].id == id)
+				{
+					retorno = 0;
+				}
+			}
+		}
+
+	return retorno;
+}
+
 
 /**
  * @fn int modificarPerrito(Perro*, int)

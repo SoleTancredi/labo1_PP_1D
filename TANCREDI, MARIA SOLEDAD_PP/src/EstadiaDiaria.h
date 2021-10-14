@@ -41,5 +41,9 @@ int findEmptyEstadia(EstadiaDiaria* arrayEstadia, int tam);
 int findByIdEstadia(EstadiaDiaria* arrayEstadia, int tam, int id, int* indice);
 int addEstadia(EstadiaDiaria* unidadEstadia,int* id, char* nombreDuenio, char* telefono, int idPerro, int dia, int mes, int anio);
 int registrarEstadia(EstadiaDiaria* arrayEstadia, int tam, int* id, Perro* arrayPerro, int tamP);
+int subMenuModifEstadia(EstadiaDiaria* arrayEstadia, int tam,int* option);
+int modificarEstadia(EstadiaDiaria* arrayEstadia, int tam, Perro* arrayPerritos);
+int validIdEstadia(EstadiaDiaria* arrayEstadia, int tam, int id);
+int ordenar(EstadiaDiaria* arrayEstadia,int tam);
 
 #endif /* ESTADIADIARIA_H_ */

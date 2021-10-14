@@ -27,96 +27,58 @@ int main(void)
 	Perro arrayPerros[CANT_P];
 	int idPerro = 7000;
 	int id = 100000;
+	int flagReserva = 0;
+	int opcion;
 
-
-	//distinto harcode
 	inicializarEstadia(arrayEstadias, CANT_E);
+	inicializarPerro( arrayPerros,CANT_P);
 	cargarPerrosHarcode(arrayPerros, &idPerro);
-	addEstadia(&arrayEstadias[0], &id, "Carlos", "1123456789", 7002,02,03,1998);
-	addEstadia(&arrayEstadias[1], &id, "Pedro", "1123456711", 7003,20,12,2020);
-	//mostrarListaEstadias(arrayEstadias, CANT_E);
 
-	registrarEstadia(arrayEstadias, CANT_E, &id, arrayPerros, CANT_P);
-	mostrarListaEstadias(arrayEstadias, CANT_E);
+	do
+	{
+		opcion = menuEstadia();
 
-
-
-
-
-
-
-
-
+		switch(opcion)
+		{
+		case 1:
+			// HARDCODE
+			addEstadia(&arrayEstadias[1], &id, "ABEL", "4545454545", 7001 ,20,12,2020);
+			addEstadia(&arrayEstadias[0], &id, "Carlos", "1123456789", 7002,02,03,1998);
+			addEstadia(&arrayEstadias[2], &id, "Pedro", "1123456711", 7000,20,12,2020);
+			addEstadia(&arrayEstadias[3], &id, "ZETA", "4545454545", 7001 ,17,12,2020);
 
 
+		//	if(registrarEstadia(arrayEstadias, CANT_E, &id, arrayPerros, CANT_P) == 0)
+			//{
+				flagReserva = 1;
+			//}
+			break;
+		case 2:
+			if(flagReserva == 1 && modificarEstadia(arrayEstadias, CANT_E, arrayPerros) == 0)
+			{
+				printf("\n//Los datos han sido modificados de manera exitosa.//");
+				mostrarListaEstadias(arrayEstadias, CANT_E);
+			}
+			break;
+		case 3:
 
+			break;
+		case 4:
+			mostrarListaEstadias(arrayEstadias, CANT_E);
+			break;
+		case 5:
+			ordenar(arrayEstadias, CANT_E);
+			mostrarListaEstadias(arrayEstadias,CANT_E);
+			break;
+		case 6:
+			break;
+		case 7:
+			printf("FIN DEL PROGRAMA");
+			break;
 
+		}
 
-   /*Perro arrayPerros[CANT_P];
-   int idPerro = 7000;
-   int opcion;
-   int flagCarga = 0;
-   inicializarPerro(arrayPerros, CANT_P);
-   cargarPerrosHarcode(arrayPerros, &idPerro);
-   do
-   {
-	   opcion = menuPerrito();
-
-	     switch(opcion)
-	     {
-	  		case 1:
-
-	  			if(altaPerrito(arrayPerros, CANT_P, &idPerro) == 0)
-	  			{
-	  				flagCarga = 1;
-	  				printf("\n// El nuevo perrito se ha dado de alta correctamente. //");
-	  			}
-	  			else
-	  			{
-	  				printf("\nNo se han podido cargar correctamente los datos. Vuelva a intentarlo.");
-	  			}
-	  		   break;
-	  		case 2:
-	  			if(flagCarga == 1 && darDeBajaPerrito(arrayPerros, CANT_P) == 0)
-	  			{
-	  				printf("\nEl perrito se ha eliminado de la lista.");
-
-	  			}
-	  			else
-	  			{
-	  				printf("\nNo hay elementos cargados. ");
-	  			}
-	  		   break;
-	  		case 3:
-	  			if(flagCarga == 1 && modificarPerrito(arrayPerros, CANT_P) == 0)
-	  			{
-
-	  			}
-	  			else
-				{
-	  				printf("\nNo hay elementos cargados. ");
-				}
-
-	  		   break;
-	  		case 4:
-	  			if(flagCarga == 1 )
-	  			{
-	  				 mostrarListaPerros(arrayPerros, CANT_P);
-	  			}
-	  			else
-	  			{
-	  				printf("\nNo hay elementos cargados. ");
-	  			}
-	  		   break;
-	  		case 5:
-	  			printf("FIN DEL PROGRAMA.");
-	  		   break;
-	     }
-   }while(opcion != 5);*/
-
-
-
-
+	}while(opcion != 7);
 
 
 	return EXIT_SUCCESS;

@@ -19,15 +19,16 @@ int menuEstadia()
 {
 	int option;
 
-	printf("\n***** ESTADIAS DIARIAS *****\n");
+	printf("\n########## ESTADIAS DIARIAS ##########\n\n");
 
 	if(utn_getNumber(&option, "Ingrese la opcion que desee realizar: "
 			"\n1.Reservar estadia: "
 			"\n2.Modificar estadia: "
 			"\n3.Cancelar estadia: "
 			"\n4.Listar estadias: "
-			"\n5.Listar perros: "
+			"\n5.ORD Listar perros: "
 			"\n6.Promedio de edad de los perros: "
+			"\n7.Salir."
 			, "Error. Reingrese la opcion. "
 			, 1, 6, 1) == 0)
 	{
@@ -180,19 +181,18 @@ int registrarEstadia(EstadiaDiaria* arrayEstadia, int tam, int* id, Perro* array
 			mostrarListaPerros(arrayPerro, tamP);
 			if(utn_getNumber(&bufferE.idPerro, "\nIngrese el ID del perro:", "\nError.Reingrese.", 7000, 10000, 1) == 0)
 			{
-				int indexPerro=0;
-				if(indexById(arrayPerro, tam,bufferE.idPerro,&indexPerro)==0)
-				{// INDEXBY ID  SALARY BY ID NAME BY ID
+				if(validIdPerro(arrayPerro, tamP, bufferE.idPerro) == 0)
+				{
 					if(addEstadia(&arrayEstadia[i], id,bufferE.nombreDuenio, bufferE.telefonoContacto, bufferE.idPerro, bufferE.fechaEstadia.dia, bufferE.fechaEstadia.mes, bufferE.fechaEstadia.anio) == 0)
 					{
-						// IDBY NAME ID BY SALARY ID BY LO K SEA
 						printf("perfecto");
 						retorno = 0;
 					}
+
 				}
 				else
 				{
-					printf("No se ha pudido");
+					printf("\nEl ID ingresado no existe.");
 				}
 
 			}
@@ -201,16 +201,148 @@ int registrarEstadia(EstadiaDiaria* arrayEstadia, int tam, int* id, Perro* array
 
 	}
 
-
-
-
-
-
-
 	return retorno;
 }
 
 
+int subMenuModifEstadia(EstadiaDiaria* arrayEstadia, int tam,int* option)
+{
+	int retorno = -1;
+	if(arrayEstadia != NULL)
+	{
+		printf("\n########## MODIFICAR DATOS ##########\n");
+
+		if(utn_getNumber(option, "\nIngrese la opcion del dato que desea modificar:"
+						"\n1. TELEFONO DE CONTACTO."
+						"\n2. PERRO segun su Identificador."
+						"\n3. SALIR. "
+						, "Error. Reingrese la opcion", 1, 3, 1) == 0)
+		{
+			printf("\nUsted ha ingresado la opcion nº %d", *option);
+			retorno = 0;
+		}
+
+	}
+
+	return retorno;
+}
+
+int modificarEstadia(EstadiaDiaria* arrayEstadia, int tam, Perro* arrayPerritos)
+{
+	int retorno = -1;
+	int option;
+	int indice;
+	int bufferId;
+	EstadiaDiaria bufferE;
+
+	if(arrayEstadia != NULL )
+	{
+		mostrarListaEstadias(arrayEstadia, tam);
+		if(utn_getNumber(&bufferId, "\nIngrese el ID de la ESTADIA que desea modificar:  "
+				,"\nError. Reingrese.",100000,150000, 1) == 0 &&
+		findByIdEstadia(arrayEstadia, tam, bufferId,&indice) == 0)
+		{
+			do
+			{
+				if(subMenuModifEstadia(arrayEstadia, tam,&option) == 0)
+			{
+				switch(option)
+				{
+					case 1:
+						if(utn_telephoneNumber(bufferE.telefonoContacto,"\nIngrese el nuevo telefono de contacto:"
+								,"\nError. Reingrese el numero.", tam, 1) == 0)
+						{
+							printf("\nEl telefono de contacto ingresado es: %s", bufferE.telefonoContacto);
+							strcpy(arrayEstadia[indice].telefonoContacto, bufferE.telefonoContacto);
+						}
+						else
+						{
+							printf("\nNo se ha podido realizar la modificacion de manera correcta");
+						}
+						break;
+					case 2:
+						mostrarListaPerros(arrayPerritos, tam);
+						if(utn_getNumber(&bufferE.idPerro, "\nIngrese el nuevo Id del perro."
+						, "\nError. Reingrese el id.", 7000, 10000, 1) == 0
+						&& validIdPerro(arrayPerritos, tam, bufferE.idPerro) == 0)
+						{
+							printf("\nEl ID ingreado es: %d",bufferE.idPerro);
+							arrayEstadia[indice].idPerro = bufferE.idPerro;
+						}
+						break;
+					case 3:
+						printf(" Salir de modificaciones.");
+						break;
+				}
+				retorno = 0;
+			}
+
+			}while(option != 3);
+		}
 
 
+	}
+
+	return retorno;
+}
+int validIdEstadia(EstadiaDiaria* arrayEstadia, int tam, int id)
+{
+	int retorno = -1;
+
+	if(arrayEstadia != NULL)
+		{
+			for(int i = 0; i < tam; i++)
+			{
+				if(arrayEstadia[i].isEmpty == 1 && arrayEstadia[i].id == id)
+				{
+					retorno = 0;
+				}
+			}
+		}
+
+	return retorno;
+}
+int ordenar(EstadiaDiaria* arrayEstadia,int tam)
+{
+	int retorno=0;
+	EstadiaDiaria aux;
+
+	for(int i=0;i<10;i++)
+	{
+		for(int j=0;j<10;j++)
+		{// primero por anio
+			if(arrayEstadia[i].fechaEstadia.anio < arrayEstadia[j].fechaEstadia.anio)
+			{
+				aux = arrayEstadia[i];
+				arrayEstadia[i]=arrayEstadia[j];
+				arrayEstadia[j]=aux;
+			}
+			else if(arrayEstadia[i].fechaEstadia.anio == arrayEstadia[j].fechaEstadia.anio)
+			{// PORMES
+				if(arrayEstadia[i].fechaEstadia.mes < arrayEstadia[j].fechaEstadia.mes)
+				{
+					aux = arrayEstadia[i];
+					arrayEstadia[i]=arrayEstadia[j];
+					arrayEstadia[j]=aux;
+				}
+				else if(arrayEstadia[i].fechaEstadia.mes == arrayEstadia[j].fechaEstadia.mes)
+				{
+					if(arrayEstadia[i].fechaEstadia.dia < arrayEstadia[j].fechaEstadia.dia)
+					{
+						aux = arrayEstadia[i];
+						arrayEstadia[i]=arrayEstadia[j];
+						arrayEstadia[j]=aux;
+					}
+					else if(strcmp(arrayEstadia[i].nombreDuenio, arrayEstadia[j].nombreDuenio) < 0)
+					{
+						aux = arrayEstadia[i];
+						arrayEstadia[i]=arrayEstadia[j];
+						arrayEstadia[j]=aux;
+					}
+				}
+			}
+		}
+	}
+	return retorno;
+}
 
