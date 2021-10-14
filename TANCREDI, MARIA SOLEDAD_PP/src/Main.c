@@ -16,9 +16,9 @@
 #include "BibliotecaUtn2021.h"
 #include "Perros.h"
 #include "EstadiaDiaria.h"
-#define CANT_P 10
+#define CANT_P 30
 #define CANT_E 30
-#define CANT_F 30
+
 
 
 int main(void)
@@ -42,13 +42,13 @@ int main(void)
 		{
 		case 1:
 			// HARDCODE
-			addEstadia(&arrayEstadias[1], &id, "ABEL", "4545454545", 7001 ,20,12,2020);
-			addEstadia(&arrayEstadias[0], &id, "Carlos", "1123456789", 7002,02,03,1998);
+			addEstadia(&arrayEstadias[0], &id, "ABEL", "4545454545", 7001 ,20,12,2020);
+			addEstadia(&arrayEstadias[1], &id, "Carlos", "1123456789", 7002,02,03,1998);
 			addEstadia(&arrayEstadias[2], &id, "Pedro", "1123456711", 7000,20,12,2020);
 			addEstadia(&arrayEstadias[3], &id, "ZETA", "4545454545", 7001 ,17,12,2020);
 
 
-		//	if(registrarEstadia(arrayEstadias, CANT_E, &id, arrayPerros, CANT_P) == 0)
+		//	if(altaEstadia(arrayEstadias, CANT_E, &id, arrayPerros, CANT_P) == 0)
 			//{
 				flagReserva = 1;
 			//}
@@ -61,14 +61,21 @@ int main(void)
 			}
 			break;
 		case 3:
-
+			if(flagReserva == 1 && darDeBajaEstadia(arrayEstadias, CANT_E) == 0)
+			{
+				printf("\nLa reserva se ha cancelado de manera correcta");
+			}
 			break;
 		case 4:
-			mostrarListaEstadias(arrayEstadias, CANT_E);
+			if(flagReserva == 1 && ordenarEstadia(arrayEstadias, CANT_E) == 0)
+			{
+				printf("\nLas estadias se han ordenado correctamente.");
+				mostrarListaEstadias(arrayEstadias,CANT_E);
+			}
+
 			break;
 		case 5:
-			ordenar(arrayEstadias, CANT_E);
-			mostrarListaEstadias(arrayEstadias,CANT_E);
+
 			break;
 		case 6:
 			break;

@@ -161,7 +161,7 @@ int addEstadia(EstadiaDiaria* unidadEstadia,int* id, char* nombreDuenio, char* t
 	return retorno;
 }
 
-int registrarEstadia(EstadiaDiaria* arrayEstadia, int tam, int* id, Perro* arrayPerro, int tamP)
+int altaEstadia(EstadiaDiaria* arrayEstadia, int tam, int* id, Perro* arrayPerro, int tamP)
 {
 	int retorno = -1;
 	int i;
@@ -302,47 +302,112 @@ int validIdEstadia(EstadiaDiaria* arrayEstadia, int tam, int id)
 
 	return retorno;
 }
-int ordenar(EstadiaDiaria* arrayEstadia,int tam)
+int ordenarEstadia(EstadiaDiaria* arrayEstadia,int tam)
 {
-	int retorno=0;
+	int retorno=-1;
+	int flag = 1;
+	int newTam;
 	EstadiaDiaria aux;
 
-	for(int i=0;i<10;i++)
+	if(arrayEstadia != NULL)
 	{
-		for(int j=0;j<10;j++)
-		{// primero por anio
-			if(arrayEstadia[i].fechaEstadia.anio < arrayEstadia[j].fechaEstadia.anio)
+		newTam = tam -1;
+
+		do
+		{
+			flag = 1;
+
+			for(int i = 0; i < newTam; i++)
 			{
-				aux = arrayEstadia[i];
-				arrayEstadia[i]=arrayEstadia[j];
-				arrayEstadia[j]=aux;
-			}
-			else if(arrayEstadia[i].fechaEstadia.anio == arrayEstadia[j].fechaEstadia.anio)
-			{// PORMES
-				if(arrayEstadia[i].fechaEstadia.mes < arrayEstadia[j].fechaEstadia.mes)
+				if(arrayEstadia[i].fechaEstadia.anio < arrayEstadia[i+1].fechaEstadia.anio)
 				{
+					flag = 0;
 					aux = arrayEstadia[i];
-					arrayEstadia[i]=arrayEstadia[j];
-					arrayEstadia[j]=aux;
+					arrayEstadia[i]=arrayEstadia[i+1];
+					arrayEstadia[i+1]=aux;
+					retorno = 0;
 				}
-				else if(arrayEstadia[i].fechaEstadia.mes == arrayEstadia[j].fechaEstadia.mes)
+				else
 				{
-					if(arrayEstadia[i].fechaEstadia.dia < arrayEstadia[j].fechaEstadia.dia)
+					if(arrayEstadia[i].fechaEstadia.anio == arrayEstadia[i+1].fechaEstadia.anio)
 					{
-						aux = arrayEstadia[i];
-						arrayEstadia[i]=arrayEstadia[j];
-						arrayEstadia[j]=aux;
-					}
-					else if(strcmp(arrayEstadia[i].nombreDuenio, arrayEstadia[j].nombreDuenio) < 0)
-					{
-						aux = arrayEstadia[i];
-						arrayEstadia[i]=arrayEstadia[j];
-						arrayEstadia[j]=aux;
+						if(arrayEstadia[i].fechaEstadia.mes < arrayEstadia[i+1].fechaEstadia.mes)
+						{
+							flag = 0;
+							aux = arrayEstadia[i];
+							arrayEstadia[i]=arrayEstadia[i+1];
+							arrayEstadia[i+1]=aux;
+							retorno = 0;
+						}
+						else
+						{
+							if(arrayEstadia[i].fechaEstadia.mes == arrayEstadia[i+1].fechaEstadia.mes)
+							{
+								if(arrayEstadia[i].fechaEstadia.dia < arrayEstadia[i+1].fechaEstadia.dia)
+								{
+									flag = 0;
+									aux = arrayEstadia[i];
+									arrayEstadia[i]=arrayEstadia[i+1];
+									arrayEstadia[i+1]=aux;
+									retorno = 0;
+								}
+								else
+								{
+									if(arrayEstadia[i].fechaEstadia.dia == arrayEstadia[i+1].fechaEstadia.dia)
+									{
+										if(strcmp(arrayEstadia[i].nombreDuenio, arrayEstadia[i+1].nombreDuenio) > 0)
+										{
+											flag = 0;
+											aux = arrayEstadia[i];
+											arrayEstadia[i]=arrayEstadia[i+1];
+											arrayEstadia[i+1]=aux;
+											retorno = 0;
+										}
+									}
+								}
+							}
+						}
 					}
 				}
+				newTam--;
+			}
+
+		}while(flag == 0);
+	}
+
+
+
+
+	return retorno;
+}
+
+int darDeBajaEstadia(EstadiaDiaria* arrayEstadia, int tam)
+{
+	int retorno = -1;
+	int id;
+	int indice;
+
+	if(arrayEstadia!= NULL)
+	{
+		printf("\n***** DAR DE BAJA UN PERRITO *****\n");
+
+		mostrarListaEstadias(arrayEstadia, tam);
+
+		if( utn_getNumber(&id, "\nIngrese el ID de la ESTADIA que desea cancelar: ","\nError. Reingrese el ID."
+					, 100000, 150000, 1) == 0 && findByIdEstadia(arrayEstadia, tam, id, &indice) == 0)
+
+		{
+			if(eliminarEstadia(&arrayEstadia[indice]) == 0)
+			{
+				retorno = 0;
 			}
 		}
 	}
 	return retorno;
 }
+
+
+
+
+
 
