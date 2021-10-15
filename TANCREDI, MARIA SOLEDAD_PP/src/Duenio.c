@@ -11,8 +11,7 @@
 #include <ctype.h>
 #include <stdio_ext.h>
 #include "BibliotecaUtn2021.h"
-#include "Perros.h"
-#include "EstadiaDiaria.h"
+
 #include "Duenio.h"
 
 void inicializarDuenio(Duenio* array, int tam)
@@ -177,7 +176,7 @@ int altaDuenio(Duenio* arrayDuenio, int tam, int* id)
 		i = findEmptyDuenio(arrayDuenio, tam);
 
 		if(i != -1 && utn_nombreOapellido(bufferDuenio.nombre, "\nIngrese el nombre del duenio: ", "\nError. Reingrese el nombre.\n"
-			, TAM,1 ) == 0 && utn_nombreOapellido(bufferDuenio.apellido, "\nIngrese el apellido: ", "\nError. Reingrese el apellido.\n", TAM, 1) == 0
+			, TAM_D,1 ) == 0 && utn_nombreOapellido(bufferDuenio.apellido, "\nIngrese el apellido: ", "\nError. Reingrese el apellido.\n", TAM_D, 1) == 0
 			&& utn_telephoneNumber(bufferDuenio.telefono,"\nIngrese el telefono de contacto: "
 					, "\nError. Reingrese el telefono.", tam, 1) == 0)
 		{
@@ -245,7 +244,7 @@ int modificarDuenio(Duenio* arrayDuenio, int len)
 			{
 				case 1:
 					if(utn_nombreOapellido(bufferDuenio.nombre,"\nIngrese el nombre del duenio: "
-							, "\nError. Reingrese el nombre.", TAM, 1) == 0)
+							, "\nError. Reingrese el nombre.", TAM_D, 1) == 0)
 					{
 						printf("\nEl nuevo nombre es: %s", bufferDuenio.nombre);
 						strcpy(arrayDuenio[indice].nombre,bufferDuenio.nombre);
@@ -257,7 +256,7 @@ int modificarDuenio(Duenio* arrayDuenio, int len)
 					break;
 				case 2:
 					if(utn_nombreOapellido(bufferDuenio.apellido, "\nIngrese el apellido: "
-							, "\nError. Reingrese el apellido", TAM, 1) == 0)
+							, "\nError. Reingrese el apellido", TAM_D, 1) == 0)
 					{
 						printf("\nEl apellido ingresado es: %s", bufferDuenio.apellido);
 						strcpy(arrayDuenio[indice].apellido, bufferDuenio.apellido);

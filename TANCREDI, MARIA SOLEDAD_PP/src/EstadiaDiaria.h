@@ -10,6 +10,7 @@
 #define TAM_NOMBRE 20
 #define TAM_TEL 15
 #include "Duenio.h"
+#include "Perros.h"
 
 
 struct
@@ -48,5 +49,6 @@ int modificarEstadia(EstadiaDiaria* arrayEstadia, int tam, Perro* arrayPerritos,
 int validIdEstadia(EstadiaDiaria* arrayEstadia, int tam, int id);
 int ordenarEstadia(EstadiaDiaria* arrayEstadia,int tam);
 int darDeBajaEstadia(EstadiaDiaria* arrayEstadia, int tam);
+void mostrarPerrosConSusEstadias(Perro* arrayPerro, int tamPerro, EstadiaDiaria* arrayEstadia, int tamEstadia);
 
 #endif /* ESTADIADIARIA_H_ */

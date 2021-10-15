@@ -38,7 +38,6 @@ int main(void)
 	inicializarDuenio(arrayDuenio, CANT_D);
 	cargarPerrosHarcode(arrayPerros, &idPerro);
 	cargarDuenioHarcode(arrayDuenio, &idDuenio);
-	mostrarListaDuenios(arrayDuenio, CANT_D);
 	addEstadia(&arrayEstadias[0], &id, "ABEL", "0221596351203", 7001 ,30000,20,12,2020);
 	addEstadia(&arrayEstadias[1], &id, "Carlos", "1123456789", 7002,31000,02,03,1998);
 	addEstadia(&arrayEstadias[2], &id, "Pedro", "02248429672", 7000,32000,20,12,2020);
@@ -64,7 +63,7 @@ int main(void)
 			}
 			break;
 		case 2:
-			/*if(flagReserva == 1 && modificarEstadia(arrayEstadias, CANT_E, arrayPerros) == 0)
+			if(flagReserva == 1 && modificarEstadia(arrayEstadias, CANT_E, arrayPerros, arrayDuenio) == 0)
 			{
 				printf("\n//Los datos han sido modificados de manera exitosa.//");
 				mostrarListaEstadias(arrayEstadias, CANT_E);
@@ -73,7 +72,7 @@ int main(void)
 			{
 				printf("\nNo se pudo realizar la modificacion de datos.");
 			}
-			break;*/
+			break;
 		case 3:
 			if(flagReserva == 1 && darDeBajaEstadia(arrayEstadias, CANT_E) == 0)
 			{
@@ -119,11 +118,17 @@ int main(void)
 			}
 			break;
 		case 7:
+             //falta
+			break;
+		case 8:
+			mostrarPerrosConSusEstadias(arrayPerros, CANT_P, arrayEstadias, CANT_E);
+			break;
+		case 9:
 			printf("\nFIN DEL PROGRAMA");
 			break;
 		}
 
-	}while(opcion != 7);
+	}while(opcion != 9);
 
 
 	return EXIT_SUCCESS;

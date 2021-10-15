@@ -10,6 +10,7 @@
 #define TAM_D 41
 #define TAM_TEL_DUENIO 25
 
+
 struct
 {
 	int id;

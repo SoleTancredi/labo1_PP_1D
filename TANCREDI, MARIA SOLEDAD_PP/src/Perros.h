@@ -9,6 +9,8 @@
 #define PERROS_H_
 #define TAM 21
 
+#include "Duenio.h"
+
 struct
 {
 	int id;
@@ -35,6 +37,7 @@ int darDeBajaPerrito(Perro* arrayPerritos, int len);
 int validIdPerro(Perro* arrayPerritos, int tam, int id);
 int contadorPerros(Perro* arrayPerro, int len);
 float promedioEdadPerros(Perro* arrayPerros, int len);
+
 
 
 #endif /* PERROS_H_ */

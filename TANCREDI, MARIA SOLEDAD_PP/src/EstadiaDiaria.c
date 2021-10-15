@@ -11,9 +11,9 @@
 #include <ctype.h>
 #include <stdio_ext.h>
 #include "BibliotecaUtn2021.h"
-#include "Perros.h"
+
 #include "EstadiaDiaria.h"
-#include "Duenio.h"
+
 
 /**
  * @fn int menuEstadia()
@@ -35,9 +35,11 @@ int menuEstadia()
 			"\n4.LISTAR ESTADIAS. "
 			"\n5.LISTAR PERROS. "
 			"\n6.PROMEDIO DE EDAD DE LOS PERROS. "
-			"\n7.FINALIZAR."
+			"\n7.PERRO CON MAS ESTADIAS RESERVADAS."
+			"\n8.LISTADO DE PERROS CON SUS ESTADIAS DIARIAS RESERVADAS."
+			"\n9.FINALIZAR."
 			, "Error. Reingrese la opcion. "
-			, 1, 7, 1) == 0)
+			, 1, 9, 1) == 0)
 	{
 		printf("Usted ha ingresado la opcion nº %d", option);
 
@@ -540,6 +542,29 @@ int darDeBajaEstadia(EstadiaDiaria* arrayEstadia, int tam)
 	}
 	return retorno;
 }
+
+void mostrarPerrosConSusEstadias(Perro* arrayPerro, int tamPerro, EstadiaDiaria* arrayEstadia, int tamEstadia)
+{
+	int i = 0;
+	int j = 0;
+
+	if(arrayPerro != NULL && arrayEstadia != NULL)
+	{
+		for(; i < tamPerro; i++)
+		{
+			for(; j < tamEstadia; j++)
+			{
+				if(arrayPerro[i].id == arrayEstadia[j].idPerro)
+				{
+					mostrarUnidadEstadia(arrayEstadia[j]);
+     			}
+
+			}
+		}
+	}
+}
+
+
 
 
 

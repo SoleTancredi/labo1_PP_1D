@@ -12,8 +12,8 @@
 #include <stdio_ext.h>
 #include "BibliotecaUtn2021.h"
 #include "Perros.h"
-#include "EstadiaDiaria.h"
-#include "Duenio.h"
+
+
 
 /**
  * @fn void inicializarPerro(Perro*, int)
@@ -498,6 +498,7 @@ float promedioEdadPerros(Perro* arrayPerros, int len)
 
 	return promedio;
 }
+
 
 
 
