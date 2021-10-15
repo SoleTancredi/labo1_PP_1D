@@ -546,9 +546,6 @@ int darDeBajaEstadia(EstadiaDiaria* arrayEstadia, int tam)
 void mostrarPerrosConSusEstadias(Perro* arrayPerro, int tamPerro, EstadiaDiaria* arrayEstadia, int tamEstadia)
 {
 
-
-
-
 	if(arrayPerro != NULL && arrayEstadia != NULL)
 	{
 		for(int i = 0; i < tamPerro; i++)
