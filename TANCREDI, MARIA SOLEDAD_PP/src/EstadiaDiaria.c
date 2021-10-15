@@ -83,6 +83,7 @@ int mostrarUnidadEstadia(EstadiaDiaria unaEstadia)
 		printf("\nNOMBRE DUEÑO: %s ", unaEstadia.nombreDuenio);
 		printf("\nTELEFONO CONTACTO: %s", unaEstadia.telefonoContacto);
 		printf("\nID PERRO: %d", unaEstadia.idPerro);
+		printf("\nID DUEÑO: %d", unaEstadia.idDuenio);
 		printf("\nFECHA: %d / %d / %d", (unaEstadia).fechaEstadia.dia,
 				(unaEstadia).fechaEstadia.mes, (unaEstadia).fechaEstadia.anio);
 		printf("\n------------------------------");
@@ -201,7 +202,7 @@ int findByIdEstadia(EstadiaDiaria* arrayEstadia, int tam, int id, int* indice)
  * @param anio
  * @return
  */
-int addEstadia(EstadiaDiaria* unidadEstadia,int* id, char* nombreDuenio, char* telefono, int idPerro, int dia, int mes, int anio)
+int addEstadia(EstadiaDiaria* unidadEstadia,int* id, char* nombreDuenio, char* telefono, int idPerro,int idDuenio, int dia, int mes, int anio)
 {
 	int retorno = -1;
 
@@ -212,6 +213,7 @@ int addEstadia(EstadiaDiaria* unidadEstadia,int* id, char* nombreDuenio, char* t
 		strcpy((*unidadEstadia).nombreDuenio, nombreDuenio);
 		strcpy((*unidadEstadia).telefonoContacto,telefono);
 		(*unidadEstadia).idPerro = idPerro;
+		(*unidadEstadia).idDuenio = idDuenio;
 		(*unidadEstadia).fechaEstadia.dia = dia;
 		(*unidadEstadia).fechaEstadia.mes = mes;
 		(*unidadEstadia).fechaEstadia.anio = anio;
@@ -233,20 +235,36 @@ int addEstadia(EstadiaDiaria* unidadEstadia,int* id, char* nombreDuenio, char* t
  * @param tamP
  * @return
  */
-int altaEstadia(EstadiaDiaria* arrayEstadia, int tam, int* id, Perro* arrayPerro, int tamP)
+int altaEstadia(EstadiaDiaria* arrayEstadia, int tam, int* id, Perro* arrayPerro, int tamP, Duenio* arrayDuenio, int tamD)
 {
 	int retorno = -1;
 	int i;
+	int iDuenio;
 	EstadiaDiaria bufferE;
 
 	if(arrayEstadia != NULL && id != NULL)
 	{
 		i = findEmptyEstadia(arrayEstadia, tam);
+		mostrarListaDuenios(arrayDuenio, tam);
+		//pregunto por el cliente de la estadia
+		if(utn_getNumber(&bufferE.idDuenio, "\nIngrese el ID del DUEÑO:", "\nError.Reingrese.", 30000, 60000, 1) == 0)
+		{
+			if(validIdDuenio(arrayDuenio, tamD, bufferE.idDuenio) == 0)
+			{
+				if(indexByIdDuenio(arrayDuenio, tamD, bufferE.idDuenio,&iDuenio) == 0)
+				{
+					strcpy(bufferE.nombreDuenio, arrayDuenio[iDuenio].nombre);
+					strcpy(bufferE.telefonoContacto, arrayDuenio[iDuenio].telefono);
+				}
+			}
+			else
+			{
+				printf("\nEl ID ingresado no existe.");
+			}
 
-		if(i != -1 && utn_nombreOapellido(bufferE.nombreDuenio,"\nIngrese el nombre del dueño: "
-			,"\nError. Reingrese el nombre.", tam, 1) == 0 && utn_telephoneNumber(bufferE.telefonoContacto,
-			"\nIngrese el telefono de contacto: ", "\nError. Reingrese el telefono.", tam, 1) == 0
-			&& utn_getNumber(&bufferE.fechaEstadia.dia, "\nIngrese la fecha: \nDia: ","\nError. Reintente."
+		}
+
+		if(i != -1 && utn_getNumber(&bufferE.fechaEstadia.dia, "\nIngrese la fecha: \nDia: ","\nError. Reintente."
 			,1, 31, 1) == 0 && utn_getNumber(&bufferE.fechaEstadia.mes, "\nMes: ","\nError. Reintente."
 			, 1, 12,1) == 0 && utn_getNumber(&bufferE.fechaEstadia.anio, "\nAño: ", "\nError. Reintente.", 1990, 2021, 1)  == 0)
 		{
@@ -255,7 +273,7 @@ int altaEstadia(EstadiaDiaria* arrayEstadia, int tam, int* id, Perro* arrayPerro
 			{
 				if(validIdPerro(arrayPerro, tamP, bufferE.idPerro) == 0)
 				{
-					if(addEstadia(&arrayEstadia[i], id,bufferE.nombreDuenio, bufferE.telefonoContacto, bufferE.idPerro, bufferE.fechaEstadia.dia, bufferE.fechaEstadia.mes, bufferE.fechaEstadia.anio) == 0)
+					if(addEstadia(&arrayEstadia[i], id,bufferE.nombreDuenio ,bufferE.telefonoContacto , bufferE.idPerro,bufferE.idDuenio, bufferE.fechaEstadia.dia, bufferE.fechaEstadia.mes, bufferE.fechaEstadia.anio) == 0)
 					{
 						printf("perfecto");
 						retorno = 0;
@@ -315,7 +333,7 @@ int subMenuModifEstadia(EstadiaDiaria* arrayEstadia, int tam,int* option)
  * @param arrayPerritos
  * @return
  */
-int modificarEstadia(EstadiaDiaria* arrayEstadia, int tam, Perro* arrayPerritos)
+int modificarEstadia(EstadiaDiaria* arrayEstadia, int tam, Perro* arrayPerritos, Duenio* arrayDuenio)
 {
 	int retorno = -1;
 	int option;
@@ -352,7 +370,8 @@ int modificarEstadia(EstadiaDiaria* arrayEstadia, int tam, Perro* arrayPerritos)
 						mostrarListaPerros(arrayPerritos, tam);
 						if(utn_getNumber(&bufferE.idPerro, "\nIngrese el nuevo Id del perro."
 						, "\nError. Reingrese el id.", 7000, 10000, 1) == 0
-						&& validIdPerro(arrayPerritos, tam, bufferE.idPerro) == 0)
+						&& validIdPerro(arrayPerritos, tam, bufferE.idPerro) == 0
+						)
 						{
 							printf("\nEl ID ingreado es: %d",bufferE.idPerro);
 							arrayEstadia[indice].idPerro = bufferE.idPerro;
