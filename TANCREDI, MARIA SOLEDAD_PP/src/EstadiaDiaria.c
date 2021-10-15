@@ -13,6 +13,7 @@
 #include "BibliotecaUtn2021.h"
 #include "Perros.h"
 #include "EstadiaDiaria.h"
+#include "Duenio.h"
 
 /**
  * @fn int menuEstadia()
